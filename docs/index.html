@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPS Optimizer v3 | Performanță Maximă</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .glow-effect { box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+    </style>
+</head>
+<body class="bg-slate-950 text-white selection:bg-blue-500/30">
+
+    <nav class="sticky top-0 z-50 glass border-b border-slate-800">
+        <div class="flex items-center justify-between px-8 py-4 max-w-7xl mx-auto">
+            <div class="text-xl font-extrabold tracking-tighter flex items-center gap-2">
+                <span class="bg-blue-600 p-1 rounded text-sm">⚡</span> FPS<span class="text-blue-500">OPTIMIZER</span>
+            </div>
+            <div class="hidden md:flex gap-8 text-slate-400 font-medium text-sm">
+                <a href="#benchmarks" class="hover:text-white transition">Benchmarks</a>
+                <a href="#disclaimer" class="hover:text-white transition">Siguranță</a>
+                <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3" target="_blank" id="star-count" class="text-blue-400 hover:text-blue-300 transition italic">Încărcare stele GitHub...</a>
+            </div>
+            <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3/releases" class="bg-white text-black px-4 py-2 rounded-lg font-bold text-sm hover:bg-blue-500 hover:text-white transition-all">
+                Download
+            </a>
+        </div>
+    </nav>
+
+    <header class="relative pt-20 pb-20 overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10">
+            <div class="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-600/10 blur-[120px] rounded-full"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-8 text-center">
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
+                Mai puține procese.<br>
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-300">Mai multe FPS-uri.</span>
+            </h1>
+            <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-10">
+                Optimizează-ți sistemul Windows pentru gaming competitiv. Elimină latența și deblochează resursele ascunse ale procesorului tău.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3/archive/refs/heads/main.zip" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 rounded-xl font-bold text-lg transition-all glow-effect">Descarcă v3.0</a>
+                <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3" target="_blank" class="px-8 py-4 bg-slate-800 border border-slate-700 rounded-xl font-bold text-lg hover:bg-slate-700 transition-all">GitHub Source</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="benchmarks" class="max-w-5xl mx-auto px-8 py-20">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold mb-4 text-blue-500 uppercase tracking-widest text-sm">Performanță Reală</h2>
+            <p class="text-2xl font-bold">Rezultate obținute după optimizare</p>
+        </div>
+
+        <div class="grid gap-8">
+            <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
+                <div class="flex justify-between mb-4 items-end">
+                    <span class="text-xl font-bold">Valorant</span>
+                    <span class="text-green-400 font-bold">+28% Performanță</span>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between text-xs text-slate-500 mb-1"><span>Default Windows</span> <span>144 FPS</span></div>
+                        <div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
+                            <div class="bg-slate-600 h-full" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs text-blue-400 mb-1"><span>Optimizat cu v3</span> <span>185 FPS</span></div>
+                        <div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
+                            <div class="bg-blue-500 h-full glow-effect" style="width: 90%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
+                <div class="flex justify-between mb-4 items-end">
+                    <span class="text-xl font-bold">Counter-Strike 2</span>
+                    <span class="text-green-400 font-bold">+35% Performanță</span>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between text-xs text-slate-500 mb-1"><span>Default Windows</span> <span>120 FPS</span></div>
+                        <div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
+                            <div class="bg-slate-600 h-full" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs text-blue-400 mb-1"><span>Optimizat cu v3</span> <span>162 FPS</span></div>
+                        <div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
+                            <div class="bg-blue-500 h-full glow-effect" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="disclaimer" class="max-w-4xl mx-auto px-8 py-20 border-t border-slate-900">
+        <div class="bg-amber-500/5 border border-amber-500/20 p-8 rounded-2xl flex flex-col md:flex-row gap-6 items-center">
+            <div class="text-amber-500 bg-amber-500/10 p-4 rounded-full text-3xl">⚠️</div>
+            <div>
+                <h3 class="text-xl font-bold text-amber-500 mb-2">Atenție & Disclaimer</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">
+                    Utilizarea acestui program implică modificări la nivel de Registry și servicii de sistem. Deși este sigur și open-source, nu ne asumăm răspunderea pentru orice instabilitate software. Recomandăm crearea unui <strong>System Restore Point</strong> înainte de utilizare.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center text-slate-600 border-t border-slate-900 text-sm">
+        <p>© 2026 - Prezent | Creat de <a href="https://github.com/staark-dev" class="text-slate-400">Staark-Dev</a></p>
+    </footer>
+
+    <script>
+        fetch('https://api.github.com/repos/staark-dev/FPS-Optimizer-Windowsv3')
+            .then(response => response.json())
+            .then(data => {
+                if(data.stargazers_count) {
+                    document.getElementById('star-count').innerText = '⭐ ' + data.stargazers_count + ' GitHub Stars';
+                }
+            })
+            .catch(() => {
+                document.getElementById('star-count').style.display = 'none';
+            });
+    </script>
+</body>
+</html>
