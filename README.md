@@ -19,7 +19,16 @@ Windows FPS Optimizer Pro applies a curated set of performance tweaks through a 
 
 ## Screenshots
 
-> *(Add screenshots here)*
+<img width="1048" height="715" alt="1" src="https://github.com/user-attachments/assets/80c83146-9517-4c08-bc28-6c8ee566c421" />
+<img width="1049" height="716" alt="2" src="https://github.com/user-attachments/assets/a9a89854-13bb-409f-a440-4de89802d80e" />
+<img width="1048" height="719" alt="3" src="https://github.com/user-attachments/assets/38754526-4199-43a0-8ae9-34f0f38ea630" />
+<img width="1048" height="718" alt="4" src="https://github.com/user-attachments/assets/e55f5683-081a-48c9-820e-a1be7beaef8e" />
+<img width="1053" height="717" alt="5" src="https://github.com/user-attachments/assets/ecad4575-d934-4d97-bdd0-7ad7940b7f4e" />
+<img width="1053" height="721" alt="6" src="https://github.com/user-attachments/assets/b7a354c1-edda-4a64-86ed-2749c39d3edb" />
+<img width="1052" height="718" alt="7 1" src="https://github.com/user-attachments/assets/e63416cf-30d9-4156-8c31-815fd06e607d" />
+<img width="1058" height="722" alt="7" src="https://github.com/user-attachments/assets/b1ce7d33-ac2b-4827-995c-c27d590e2bc4" />
+<img width="1049" height="716" alt="8 1" src="https://github.com/user-attachments/assets/0b1073cc-f109-4723-9280-5b0b1be4bce7" />
+<img width="1052" height="715" alt="8" src="https://github.com/user-attachments/assets/01eb69ab-fd05-42ee-81e4-178d29a0ca6d" />
 
 ---
 
