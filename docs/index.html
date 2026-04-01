@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ro" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FPS Optimizer v3 | Staark-Dev</title>
+<link rel="icon" href="https://raw.githubusercontent.com/staark-dev/FPS-Optimizer-Windowsv3/refs/heads/master/docs/assets/AppIcon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--c:#06b6d4;--c2:#3b82f6;--cg:#22c55e;--ca:#f59e0b;--bg:#030712;--bg2:#060f1e;--border:rgba(6,182,212,.12);--text:#e2f4f8;--muted:#4a7a8a}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(6,182,212,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(6,182,212,.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;animation:grid 40s linear infinite}
+@keyframes grid{to{background-position:60px 60px}}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.025) 2px,rgba(0,0,0,.025) 4px);pointer-events:none;z-index:9999}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--c);border-radius:10px}
+.mono{font-family:'Space Mono',monospace}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(1.5rem,5vw,3rem);background:rgba(3,7,18,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:12px;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.05em;text-decoration:none;color:var(--text)}
+.nav-logo img{width:32px;height:32px;border-radius:8px}
+.nav-logo span{color:var(--c)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.15em;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--c);transition:width .3s}
+.nav-links a:hover{color:var(--c)}.nav-links a:hover::after{width:100%}
+.nav-actions{display:flex;gap:10px;align-items:center}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.08);color:var(--muted);padding:8px 16px;border-radius:8px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;cursor:pointer;transition:all .2s;font-family:'Space Mono',monospace}
+.btn-ghost:hover{border-color:var(--c);color:var(--c);background:rgba(6,182,212,.05)}
+.btn-github{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:var(--text);padding:8px 20px;border-radius:8px;text-decoration:none;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;transition:all .2s;display:flex;align-items:center;gap:8px}
+.btn-github:hover{background:rgba(255,255,255,.08)}
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px clamp(1.5rem,6vw,4rem) 80px;position:relative;overflow:hidden}
+#hero::before{content:'';position:absolute;top:-10%;left:50%;transform:translateX(-50%);width:1000px;height:700px;background:radial-gradient(ellipse,rgba(6,182,212,.09) 0%,transparent 65%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;padding:8px 18px;border-radius:100px;border:1px solid var(--border);background:rgba(6,182,212,.05);color:var(--c);font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.2em;margin-bottom:3rem;font-family:'Space Mono',monospace}
+.pulse{width:8px;height:8px;background:var(--c);border-radius:50%;animation:pulse 2s ease-in-out infinite;box-shadow:0 0 10px var(--c)}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+.hero-title{font-family:'Bebas Neue',sans-serif;letter-spacing:.02em;line-height:.9;font-size:clamp(5rem,16vw,14rem);margin-bottom:2rem}
+.hero-title .l1{display:block;color:var(--text)}
+.hero-title .l2{display:block;-webkit-text-stroke:2px var(--c);color:transparent}
+.hero-title .l3{display:block;color:var(--text)}
+.hero-sub{max-width:640px;font-size:1.05rem;color:var(--muted);line-height:1.7;margin-bottom:3rem}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:center;margin-bottom:3.5rem}
+.btn-primary{background:var(--c);color:#000;padding:16px 40px;border-radius:10px;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.06em;text-decoration:none;transition:all .25s;box-shadow:0 0 30px rgba(6,182,212,.3);display:flex;align-items:center;gap:10px}
+.btn-primary:hover{background:#fff;box-shadow:0 0 50px rgba(6,182,212,.5);transform:translateY(-2px)}
+.btn-outline{border:1px solid var(--border);color:var(--muted);padding:16px 30px;border-radius:10px;text-decoration:none;font-size:.8rem;font-weight:600;transition:all .25s}
+.btn-outline:hover{border-color:var(--c);color:var(--c)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.meta-chip{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02);font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted);text-decoration:none}
+.meta-chip:hover{color:var(--c)}
+.dot{width:6px;height:6px;border-radius:50%}
+.dot.g{background:var(--cg);box-shadow:0 0 8px var(--cg)}
+.dot.c{background:var(--c);box-shadow:0 0 8px var(--c)}
+/* STATS */
+#stats{position:relative;z-index:1;border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--border)}
+.stat-cell{background:var(--bg);padding:28px 16px;text-align:center}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--c);line-height:1}
+.stat-label{font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-top:6px}
+/* GENERIC */
+section{position:relative;z-index:1}
+.wrap{max-width:1280px;margin:0 auto;padding:100px clamp(1.5rem,5vw,4rem)}
+.sec-head{margin-bottom:60px}
+.eyebrow{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--c);text-transform:uppercase;letter-spacing:.3em;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+.eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--c)}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,4.5rem);letter-spacing:.02em;line-height:.95;color:var(--text)}
+/* BENTO */
+.bento{display:grid;grid-template-columns:2fr 1fr;gap:14px}
+@media(max-width:900px){.bento{grid-template-columns:1fr}}
+.bc{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:44px;position:relative;overflow:hidden;transition:border-color .3s}
+.bc:hover{border-color:rgba(6,182,212,.3)}
+.bc.ac{background:#041622;border-color:rgba(6,182,212,.25)}
+.bc.fw{grid-column:span 2}
+@media(max-width:900px){.bc.fw{grid-column:span 1}}
+.bc-bg{position:absolute;bottom:-20px;right:-10px;font-family:'Bebas Neue',sans-serif;font-size:8rem;color:rgba(6,182,212,.04);line-height:1;pointer-events:none;user-select:none}
+.bc-ey{font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:var(--c);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.bc-ey::before{content:'//';opacity:.5}
+.bc h3{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.03em;margin-bottom:14px;color:var(--text)}
+.bc p{font-size:.92rem;color:var(--muted);line-height:1.75}
+/* TAGS */
+.tags{display:flex;flex-wrap:wrap;gap:7px}
+.tag{background:rgba(6,182,212,.06);border:1px solid rgba(6,182,212,.15);color:#7dd3e8;padding:5px 11px;border-radius:6px;font-size:.67rem;font-weight:700;font-family:'Space Mono',monospace;transition:all .2s;cursor:default}
+.tag:hover{background:var(--c);color:#000;border-color:var(--c)}
+.tag.s{background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.2);color:#86efac}.tag.s:hover{background:var(--cg);color:#000}
+.tag.m{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.2);color:#fcd34d}.tag.m:hover{background:var(--ca);color:#000}
+.tag.v{background:rgba(139,92,246,.06);border-color:rgba(139,92,246,.2);color:#c4b5fd}
+/* WIZARD */
+.wiz{display:grid;grid-template-columns:repeat(7,1fr);gap:0;position:relative}
+@media(max-width:1100px){.wiz{grid-template-columns:repeat(4,1fr);gap:14px}}
+@media(max-width:600px){.wiz{grid-template-columns:repeat(2,1fr);gap:12px}}
+.ws{text-align:center;padding:30px 10px;position:relative}
+.ws::after{content:'';position:absolute;top:36px;left:calc(50% + 26px);right:calc(-50% + 26px);height:1px;background:linear-gradient(90deg,var(--c),transparent);opacity:.25}
+.ws:last-child::after{display:none}
+@media(max-width:1100px){.ws::after{display:none}}
+.ws-n{width:50px;height:50px;border-radius:13px;border:1px solid var(--border);background:var(--bg2);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--c);transition:all .3s;position:relative;z-index:1}
+.ws:hover .ws-n{background:rgba(6,182,212,.1);border-color:var(--c);box-shadow:0 0 20px rgba(6,182,212,.2)}
+.ws-l{font-size:.73rem;font-weight:700;color:var(--text);margin-bottom:5px}
+.ws-d{font-size:.64rem;color:var(--muted);line-height:1.5;font-family:'Space Mono',monospace}
+/* PROFILES */
+.prof{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:800px){.prof{grid-template-columns:1fr}}
+.pc{border-radius:20px;padding:34px 30px;border:1px solid var(--border);background:var(--bg2);position:relative;overflow:hidden;transition:all .3s}
+.pc:hover{transform:translateY(-4px)}
+.pc.ft{border-color:rgba(6,182,212,.4);background:linear-gradient(135deg,#041622,#061826)}
+.pc.ft::before{content:'RECOMMENDED';position:absolute;top:14px;right:14px;font-family:'Space Mono',monospace;font-size:.52rem;font-weight:700;color:var(--c);letter-spacing:.15em;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.2);padding:4px 10px;border-radius:4px}
+.pc-icon{font-size:2rem;margin-bottom:18px}
+.pc-name{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.03em;margin-bottom:6px}
+.pc-mods{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--c);margin-bottom:14px;letter-spacing:.1em}
+.pc-desc{font-size:.83rem;color:var(--muted);line-height:1.65;margin-bottom:20px}
+.pc-list{display:flex;flex-direction:column;gap:6px}
+.pc-li{display:flex;align-items:center;gap:8px;font-size:.74rem;color:var(--muted)}
+.pc-li::before{content:'→';color:var(--c);font-size:.62rem;flex-shrink:0}
+/* MODULES */
+.mods{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.mc{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:22px;transition:all .3s;position:relative;overflow:hidden}
+.mc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:opacity .3s}
+.mc.ms::before{background:linear-gradient(90deg,var(--cg),transparent)}
+.mc.mm::before{background:linear-gradient(90deg,var(--ca),transparent)}
+.mc.mv::before{background:linear-gradient(90deg,#8b5cf6,transparent)}
+.mc:hover{border-color:rgba(6,182,212,.25);transform:translateY(-3px)}.mc:hover::before{opacity:1}
+.mc-hd{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px}
+.mc-nm{font-size:.83rem;font-weight:600;color:var(--text);line-height:1.4;flex:1}
+.mc-no{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);padding:3px 7px;border-radius:5px;flex-shrink:0;margin-top:2px}
+.mc-ft{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+.mc-cat{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted)}
+.risk{font-size:.58rem;font-weight:700;font-family:'Space Mono',monospace;padding:3px 8px;border-radius:4px;letter-spacing:.08em}
+.risk.rs{background:rgba(34,197,94,.1);color:#86efac;border:1px solid rgba(34,197,94,.2)}
+.risk.rm{background:rgba(245,158,11,.1);color:#fcd34d;border:1px solid rgba(245,158,11,.2)}
+.risk.rv{background:rgba(139,92,246,.1);color:#c4b5fd;border:1px solid rgba(139,92,246,.2)}
+/* GALLERY */
+.gal{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:700px){.gal{grid-template-columns:1fr}}
+.gi{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--bg2)}
+.gi img{width:100%;display:block;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.gi:hover img{transform:scale(1.03)}
+.gi-lb{position:absolute;bottom:0;left:0;right:0;padding:16px;background:linear-gradient(transparent,rgba(3,7,18,.9));font-family:'Space Mono',monospace;font-size:.6rem;color:var(--c);letter-spacing:.2em;text-transform:uppercase}
+/* BENCH */
+.bench-lay{display:grid;grid-template-columns:1fr 310px;gap:60px;align-items:start}
+@media(max-width:960px){.bench-lay{grid-template-columns:1fr;gap:40px}}
+.bl{display:flex;flex-direction:column;gap:28px}
+.bh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.bg{font-family:'Bebas Neue',sans-serif;font-size:1.45rem;letter-spacing:.05em;color:var(--text)}
+.bv{font-family:'Space Mono',monospace;font-size:.73rem;font-weight:700;color:var(--c)}
+.bb{height:3px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden}
+.bf{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--c2),var(--c));width:0;transition:width 1.4s cubic-bezier(.4,0,.2,1);box-shadow:0 0 12px var(--c)}
+.bn{font-size:.65rem;color:var(--muted);margin-top:7px;font-family:'Space Mono',monospace}
+/* HW CARD */
+.hwc{background:var(--bg2);border:1px solid var(--border);border-radius:20px;overflow:hidden;position:sticky;top:100px}
+.hwh{padding:16px 20px 13px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.hw-dot{width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c);flex-shrink:0}
+.hwh span{font-family:'Space Mono',monospace;font-size:.57rem;color:var(--c);text-transform:uppercase;letter-spacing:.18em}
+.hwb{padding:16px 20px 20px}
+.hwr{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.hwr:last-child{border-bottom:none;padding-bottom:0}
+.hwk{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;flex-shrink:0}
+.hwv{font-size:.73rem;font-weight:600;color:var(--text);text-align:right;line-height:1.4}
+.hw-bdg{display:block;margin-top:14px;background:rgba(6,182,212,.06);border:1px solid rgba(6,182,212,.2);color:var(--c);padding:7px;border-radius:7px;font-family:'Space Mono',monospace;font-size:.57rem;text-transform:uppercase;letter-spacing:.15em;text-align:center}
+/* COMPAT */
+.comp{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:48px}
+.ci{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;align-items:center;gap:13px}
+.ci-ic{font-size:1.25rem;flex-shrink:0}
+.ci-lb{font-size:.73rem;font-weight:600;color:var(--text)}
+.ci-sb{font-size:.61rem;color:var(--muted);margin-top:3px;font-family:'Space Mono',monospace}
+/* FAQ */
+.faq-lay{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start}
+@media(max-width:900px){.faq-lay{grid-template-columns:1fr;gap:40px}}
+.acc{display:flex;flex-direction:column;gap:2px}
+.ai{border:1px solid var(--border);border-radius:12px;background:var(--bg2);overflow:hidden;transition:border-color .3s}
+.ai.op{border-color:rgba(6,182,212,.3)}
+.ab2{width:100%;background:none;border:none;cursor:pointer;padding:19px 21px;display:flex;align-items:center;justify-content:space-between;gap:14px;text-align:left}
+.ab2 span{font-size:.88rem;font-weight:600;color:var(--text)}
+.ai-ic{width:26px;height:26px;border-radius:6px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--c);font-size:1rem;transition:transform .3s,background .3s;flex-shrink:0}
+.ai.op .ai-ic{transform:rotate(45deg);background:rgba(6,182,212,.15)}
+.ab3{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1)}
+.ab4{padding:0 21px 19px;font-size:.85rem;color:var(--muted);line-height:1.75}
+.inst{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:34px}
+.inst h3{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;letter-spacing:.04em;color:var(--text);margin-bottom:24px}
+.isteps{display:flex;flex-direction:column;gap:16px}
+.is{display:flex;align-items:flex-start;gap:13px}
+.is-n{width:32px;height:32px;border-radius:8px;background:rgba(6,182,212,.1);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;color:var(--c);flex-shrink:0}
+.is-t{font-size:.83rem;color:var(--muted);line-height:1.6;padding-top:6px}
+.is-t strong{color:var(--text);font-weight:600}
+/* FOOTER */
+footer{position:relative;z-index:1;border-top:1px solid var(--border)}
+.fi{max-width:1280px;margin:0 auto;padding:50px clamp(1.5rem,5vw,4rem)}
+.fn{background:rgba(245,158,11,.04);border:1px solid rgba(245,158,11,.15);border-radius:14px;padding:22px 26px;margin-bottom:36px;display:flex;gap:13px;align-items:flex-start}
+.fn-ic{font-size:1rem;flex-shrink:0;margin-top:2px}
+.fn-t{font-size:.81rem;color:var(--muted);line-height:1.65}
+.fn-t strong{color:#fbbf24;font-weight:600}
+.fb{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.fl{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.1em;color:var(--muted)}
+.fl span{color:var(--c)}
+.fc{font-family:'Space Mono',monospace;font-size:.57rem;color:rgba(74,122,138,.5);letter-spacing:.1em;text-transform:uppercase}
+/* ANIMS */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s,transform .7s cubic-bezier(.4,0,.2,1)}
+.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+@media(max-width:768px){.nav-links{display:none}.bento{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">
+    <img src="https://raw.githubusercontent.com/staark-dev/FPS-Optimizer-Windowsv3/refs/heads/master/docs/assets/AppIcon.png" alt="">
+    FPS<span>OPTIMIZER</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#wizard" data-t="n1">Wizard</a></li>
+    <li><a href="#profiles" data-t="n2">Profile</a></li>
+    <li><a href="#modules" data-t="n3">Module</a></li>
+    <li><a href="#gallery" data-t="n4">Interfață</a></li>
+    <li><a href="#benchmarks" data-t="n5">Rezultate</a></li>
+    <li><a href="#faq" data-t="n6">FAQ</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-ghost" onclick="tL()" id="lb">EN</button>
+    <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3" target="_blank" class="btn-github">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-badge"><span class="pulse"></span><span data-t="badge">v3.0.4 — Build Stabil — SHA-256 Verificat</span></div>
+  <h1 class="hero-title">
+    <span class="l1" data-t="hl1">UNLEASH</span>
+    <span class="l2" data-t="hl2">LIMITLESS</span>
+    <span class="l3" data-t="hl3">FPS.</span>
+  </h1>
+  <p class="hero-sub" data-t="hsub">Utilitar open-source C# / WPF pentru Windows — wizard ghidat în 7 pași, 13 module de optimizare, backup triplu automat și restore point înainte de orice modificare.</p>
+  <div class="hero-cta">
+    <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3/releases/latest" class="btn-primary" data-t="hb1">↓ &nbsp;Download Optimizer</a>
+    <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3" class="btn-outline" target="_blank" data-t="hb2">View Source</a>
+  </div>
+  <div class="hero-meta">
+    <a id="vtl" href="#" target="_blank" class="meta-chip"><span class="dot g"></span>VirusTotal: 0 / 72</a>
+    <div class="meta-chip"><span class="dot c"></span>SHA-256: <span id="hd"></span></div>
+    <div class="meta-chip">C# · .NET 8 · WPF · MIT</div>
+    <div class="meta-chip">No installer · Self-contained EXE</div>
+  </div>
+</section>
+
+<div id="stats">
+  <div class="stat-cell reveal"><div class="stat-num" data-count="13">0</div><div class="stat-label" data-t="s1">Optimization Modules</div></div>
+  <div class="stat-cell reveal d1"><div class="stat-num" data-count="7">0</div><div class="stat-label" data-t="s2">Wizard Steps</div></div>
+  <div class="stat-cell reveal d2"><div class="stat-num" data-count="23">0</div><div class="stat-label" data-t="s3">Services Disabled</div></div>
+  <div class="stat-cell reveal d3"><div class="stat-num" data-count="35" data-suffix="+">0</div><div class="stat-label" data-t="s4">Bloatware Apps Removed</div></div>
+  <div class="stat-cell reveal d4"><div class="stat-num" data-count="72">0</div><div class="stat-label" data-t="s5">AV Scanners: Clean</div></div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" style="border-top:1px solid var(--border)">
+  <div class="wrap">
+    <div class="sec-head reveal"><div class="eyebrow" data-t="aey">Filozofie</div><h2 class="sec-title" data-t="ati">Sigur prin<br>Design</h2></div>
+    <div class="bento">
+      <div class="bc reveal">
+        <div class="bc-bg">OSS</div>
+        <div class="bc-ey" data-t="b1e">Open Source · C#</div>
+        <h3 data-t="b1t">Transparență Totală</h3>
+        <p data-t="b1d">Fiecare modificare de regiștri, serviciu suspendat și app dezinstalat este vizibil public pe GitHub. Codul C# este complet auditat — nu ascundem nimic.</p>
+        <div style="margin-top:22px" class="tags"><span class="tag">.NET 8.0</span><span class="tag">WPF</span><span class="tag">C#</span><span class="tag">MIT License</span><span class="tag">Single EXE</span></div>
+      </div>
+      <div class="bc ac reveal d1">
+        <div class="bc-bg" style="color:rgba(6,182,212,.07)">✓</div>
+        <div class="bc-ey" data-t="b2e">Failsafe</div>
+        <h3 data-t="b2t">Backup Triplu Automat</h3>
+        <p data-t="b2d">Înainte de execuție: Restore Point Windows, export .REG pe Desktop și snapshot .CSV al serviciilor. 3 metode independente de revenire.</p>
+        <div style="margin-top:18px" class="tags"><span class="tag s">RESTORE POINT</span><span class="tag s">.REG BACKUP</span><span class="tag s">.CSV SNAPSHOT</span></div>
+      </div>
+      <div class="bc fw reveal d2">
+        <div class="bc-ey" data-t="b3e">Anti-Cheat · No Overclocking</div>
+        <h3 data-t="b3t">100% Safe — Fără BIOS, Fără Drivere, Fără Overclocking</h3>
+        <p style="max-width:700px" data-t="b3d">Nu modificăm memoria jocurilor, nu injectăm DLL-uri, nu atingem drivere, nu modificăm BIOS sau frecvențe. Optimizăm exclusiv setări native Windows: registry, power plan, servicii — compatibil cu Vanguard, EAC și BattlEye.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WIZARD -->
+<section id="wizard" style="border-top:1px solid var(--border)">
+  <div class="wrap">
+    <div class="sec-head reveal"><div class="eyebrow" data-t="wey">Flow Aplicație</div><h2 class="sec-title" data-t="wti">Wizard în<br>7 Pași</h2><p style="margin-top:12px;font-size:.82rem;color:var(--muted)" data-t="wsu">Welcome → Scan → Backup → Profile → Configure → Execute → Done</p></div>
+    <div class="wiz">
+      <div class="ws reveal"><div class="ws-n">1</div><div class="ws-l" data-t="w1l">Welcome</div><div class="ws-d" data-t="w1d">Intro &amp; feature overview</div></div>
+      <div class="ws reveal d1"><div class="ws-n">2</div><div class="ws-l" data-t="w2l">System Scan</div><div class="ws-d" data-t="w2d">CPU, GPU, RAM,<br>SSD/HDD, OS, power plan</div></div>
+      <div class="ws reveal d2"><div class="ws-n">3</div><div class="ws-l" data-t="w3l">Backup</div><div class="ws-d" data-t="w3d">Restore Point<br>+ .REG + .CSV</div></div>
+      <div class="ws reveal d3"><div class="ws-n">4</div><div class="ws-l" data-t="w4l">Profile</div><div class="ws-d" data-t="w4d">Safe / Balanced<br>/ Gaming Hardcore</div></div>
+      <div class="ws reveal d4"><div class="ws-n">5</div><div class="ws-l" data-t="w5l">Configure</div><div class="ws-d" data-t="w5d">Fine-tune modules<br>individual</div></div>
+      <div class="ws reveal d4"><div class="ws-n">6</div><div class="ws-l" data-t="w6l">Execute</div><div class="ws-d" data-t="w6d">Live log colorat<br>în timp real</div></div>
+      <div class="ws reveal d4"><div class="ws-n">7</div><div class="ws-l" data-t="w7l">Done</div><div class="ws-d" data-t="w7d">Next steps<br>&amp; restart</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILES -->
+<section id="profiles" style="border-top:1px solid var(--border)">
+  <div class="wrap">
+    <div class="sec-head reveal"><div class="eyebrow" data-t="pey">Preset-uri</div><h2 class="sec-title" data-t="pti">Alege Profilul<br>Potrivit</h2></div>
+    <div class="prof">
+      <div class="pc reveal">
+        <div class="pc-icon">🛡️</div>
+        <div class="pc-name" data-t="p1n">Safe</div>
+        <div class="pc-mods" data-t="p1m">4 MODULE ACTIVE</div>
+        <p class="pc-desc" data-t="p1d">Zero risc. Tweak-uri cu impact ridicat și nicio consecință negativă. Ideal pentru utilizatori care vor un mic boost fără modificări majore.</p>
+        <div class="pc-list">
+          <div class="pc-li" data-t="p1a">Ultimate Performance Power Plan</div>
+          <div class="pc-li" data-t="p1b">CPU Core Parking disabled</div>
+          <div class="pc-li" data-t="p1c">RAM kernel lock</div>
+          <div class="pc-li" data-t="p1e">Registry FPS Tweaks</div>
+        </div>
+      </div>
+      <div class="pc ft reveal d1">
+        <div class="pc-icon">⚖️</div>
+        <div class="pc-name" data-t="p2n">Balanced</div>
+        <div class="pc-mods" data-t="p2m">8 MODULE ACTIVE</div>
+        <p class="pc-desc" data-t="p2d">Recomandat pentru majoritatea utilizatorilor. Echilibru perfect între câștig și stabilitate. Testat pe i5-13420H / 48GB RAM.</p>
+        <div class="pc-list">
+          <div class="pc-li" data-t="p2a">Toate modulele Safe</div>
+          <div class="pc-li" data-t="p2b">GPU &amp; DirectX Priority 8</div>
+          <div class="pc-li" data-t="p2c">Network Latency Minimum</div>
+          <div class="pc-li" data-t="p2e">Telemetry &amp; Tracking Off</div>
+          <div class="pc-li" data-t="p2f">Visual Effects — Performance</div>
+        </div>
+      </div>
+      <div class="pc reveal d2">
+        <div class="pc-icon">🔥</div>
+        <div class="pc-name" data-t="p3n">Gaming Hardcore</div>
+        <div class="pc-mods" data-t="p3m">13 MODULE — MAXIMUM FPS</div>
+        <p class="pc-desc" data-t="p3d">Toate cele 13 module active. Include dezactivarea a 23 servicii și eliminarea a 35+ bloatware apps. Risc mediu — backup automat inclus.</p>
+        <div class="pc-list">
+          <div class="pc-li" data-t="p3a">Toate modulele Balanced</div>
+          <div class="pc-li" data-t="p3b">23 servicii dezactivate</div>
+          <div class="pc-li" data-t="p3c">35+ bloatware apps removed</div>
+          <div class="pc-li" data-t="p3e">Telemetry tasks disabled</div>
+          <div class="pc-li" data-t="p3f">Temp / DNS / WinSxS cleanup</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
+<section id="modules" style="border-top:1px solid var(--border)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow" data-t="mey">Inginerie</div>
+      <h2 class="sec-title" data-t="mti">Cele 13<br>Module</h2>
+      <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+        <span class="tag s">■ SAFE</span><span class="tag m">■ MEDIUM RISK</span><span class="tag v">■ COSMETIC</span>
+      </div>
+    </div>
+    <div class="mods">
+      <div class="mc ms reveal"><div class="mc-hd"><div class="mc-nm" data-t="m1">Ultimate Performance Power Plan</div><div class="mc-no">01</div></div><div class="mc-ft"><div class="mc-cat">⚡ Power &amp; CPU</div><span class="risk rs">SAFE</span></div></div>
+      <div class="mc ms reveal d1"><div class="mc-hd"><div class="mc-nm" data-t="m2">CPU Optimization — Core Parking off, Boost max</div><div class="mc-no">02</div></div><div class="mc-ft"><div class="mc-cat">⚡ Power &amp; CPU</div><span class="risk rs">SAFE</span></div></div>
+      <div class="mc ms reveal d2"><div class="mc-hd"><div class="mc-nm" data-t="m3">RAM Optimization — lock kernel in RAM</div><div class="mc-no">03</div></div><div class="mc-ft"><div class="mc-cat">💾 Memory &amp; Storage</div><span class="risk rs">SAFE</span></div></div>
+      <div class="mc ms reveal d3"><div class="mc-hd"><div class="mc-nm" data-t="m4">SSD/HDD Storage Optimization — TRIM, NTFS</div><div class="mc-no">04</div></div><div class="mc-ft"><div class="mc-cat">💾 Memory &amp; Storage</div><span class="risk rs">SAFE</span></div></div>
+      <div class="mc ms reveal"><div class="mc-hd"><div class="mc-nm" data-t="m5">GPU &amp; DirectX Optimization — Priority 8, GPU Scheduling</div><div class="mc-no">05</div></div><div class="mc-ft"><div class="mc-cat">🎮 Graphics</div><span class="risk rs">SAFE</span></div></div>
+      <div class="mc ms reveal d1"><div class="mc-hd"><div class="mc-nm" data-t="m6">Registry FPS Tweaks — SystemResponsiveness, Win32Priority</div><div class="mc-no">06</div></div><div class="mc-ft"><div class="mc-cat">🎮 Graphics</div><span class="risk rs">SAFE</span></div></div>
+      <div class="mc ms reveal d2"><div class="mc-hd"><div class="mc-nm" data-t="m7">Network — Minimum Latency (Nagle off, QoS 20% freed)</div><div class="mc-no">07</div></div><div class="mc-ft"><div class="mc-cat">🌐 Network</div><span class="risk rs">SAFE</span></div></div>
+      <div class="mc mv reveal d3"><div class="mc-hd"><div class="mc-nm" data-t="m8">Visual Effects — Maximum Performance Mode</div><div class="mc-no">08</div></div><div class="mc-ft"><div class="mc-cat">👁️ Interface</div><span class="risk rv">COSMETIC</span></div></div>
+      <div class="mc ms reveal"><div class="mc-hd"><div class="mc-nm" data-t="m9">Telemetry &amp; Tracking — Fully Disabled</div><div class="mc-no">09</div></div><div class="mc-ft"><div class="mc-cat">🛡️ Privacy</div><span class="risk rs">SAFE</span></div></div>
+      <div class="mc mm reveal d1"><div class="mc-hd"><div class="mc-nm" data-t="m10">Disable 23 Unnecessary Background Services</div><div class="mc-no">10</div></div><div class="mc-ft"><div class="mc-cat">⚙️ Services</div><span class="risk rm">MEDIUM</span></div></div>
+      <div class="mc mm reveal d2"><div class="mc-hd"><div class="mc-nm" data-t="m11">Remove 35+ Preinstalled Bloatware Apps</div><div class="mc-no">11</div></div><div class="mc-ft"><div class="mc-cat">🗑️ Applications</div><span class="risk rm">MEDIUM</span></div></div>
+      <div class="mc ms reveal d3"><div class="mc-hd"><div class="mc-nm" data-t="m12">Disable Scheduled Telemetry Tasks</div><div class="mc-no">12</div></div><div class="mc-ft"><div class="mc-cat">🗑️ Applications</div><span class="risk rs">SAFE</span></div></div>
+      <div class="mc ms reveal"><div class="mc-hd"><div class="mc-nm" data-t="m13">Clean Temp Files, DNS Cache, WinSxS temp</div><div class="mc-no">13</div></div><div class="mc-ft"><div class="mc-cat">🧹 Cleanup</div><span class="risk rs">SAFE</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" style="border-top:1px solid var(--border)">
+  <div class="wrap">
+    <div class="sec-head reveal"><div class="eyebrow" data-t="gey">UI Preview</div><h2 class="sec-title" data-t="gti">Interfața<br>Aplicației</h2><p style="margin-top:12px;font-size:.82rem;color:var(--muted)" data-t="gsu">7 pagini WPF · Bilingv RO/EN · Live execution log cu culori · Dark theme</p></div>
+    <div class="gal">
+      <div class="gi reveal"><img src="https://raw.githubusercontent.com/staark-dev/FPS-Optimizer-Windowsv3/refs/heads/master/docs/assets/main-menu.png" alt="Main Menu"><div class="gi-lb">MAIN_MENU — STEP 1: WELCOME</div></div>
+      <div class="gi reveal d1"><img src="https://raw.githubusercontent.com/staark-dev/FPS-Optimizer-Windowsv3/refs/heads/master/docs/assets/engine-log.png" alt="Engine Log"><div class="gi-lb">ENGINE_LOG — STEP 6: EXECUTE</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BENCHMARKS -->
+<section id="benchmarks" style="border-top:1px solid var(--border)">
+  <div class="wrap">
+    <div class="sec-head reveal"><div class="eyebrow" data-t="bey">Date Reale</div><h2 class="sec-title" data-t="bti">Performanță<br>Verificată</h2><p style="margin-top:12px;font-size:.76rem;color:var(--muted);font-family:'Space Mono',monospace" data-t="bsu">// Profil Balanced · i5-13420H 2.10GHz · 48GB RAM · Windows 11 x64</p></div>
+    <div class="bench-lay">
+      <div class="bl">
+        <div class="reveal"><div class="bh"><span class="bg">Fortnite</span><span class="bv">+12% AVG FPS</span></div><div class="bb"><div class="bf" data-width="92"></div></div><div class="bn">// GameMode Fix + Services cleanup + Registry Tweaks</div></div>
+        <div class="reveal d1"><div class="bh"><span class="bg">CS2</span><span class="bv">+5–8% AVG FPS</span></div><div class="bb"><div class="bf" data-width="80"></div></div><div class="bn">// Registry FPS Tweaks + Nagle off + Win32Priority</div></div>
+        <div class="reveal d2"><div class="bh"><span class="bg">Valorant</span><span class="bv">+8% AVG FPS</span></div><div class="bb"><div class="bf" data-width="84"></div></div><div class="bn">// Vanguard compatible · GPU Priority 8 + GPU Scheduling</div></div>
+        <div class="reveal d3"><div class="bh"><span class="bg">DPC Latency</span><span class="bv">↓ ~15% Input Lag</span></div><div class="bb"><div class="bf" data-width="88"></div></div><div class="bn">// Core Parking off + CPU Boost max + I/O Priority</div></div>
+        <div class="reveal d4"><div class="bh"><span class="bg">Stutter Events</span><span class="bv">↓ ~40% (Hardcore)</span></div><div class="bb"><div class="bf" data-width="76"></div></div><div class="bn">// RAM kernel lock + 23 services disabled + bloatware removed</div></div>
+      </div>
+      <div class="reveal d2">
+        <div class="hwc">
+          <div class="hwh"><span class="hw-dot"></span><span>Test System</span></div>
+          <div class="hwb">
+            <div class="hwr"><span class="hwk">Device</span><span class="hwv">DESKTOP-DOCU1K7</span></div>
+            <div class="hwr"><span class="hwk">CPU</span><span class="hwv">Intel i5-13420H<br>2.10 GHz · 8C/12T</span></div>
+            <div class="hwr"><span class="hwk">RAM</span><span class="hwv">48 GB DDR5<br>(47.7 GB usable)</span></div>
+            <div class="hwr"><span class="hwk">OS</span><span class="hwv">Windows 11 x64<br>OEM build</span></div>
+            <div class="hwr"><span class="hwk">Gen</span><span class="hwv">13th Gen Raptor Lake-H</span></div>
+            <div class="hwr"><span class="hwk">Profile</span><span class="hwv">Balanced (8 modules)</span></div>
+            <div class="hw-bdg">✓ Tested &amp; Verified</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="comp">
+      <div class="ci reveal"><div class="ci-ic">🪟</div><div><div class="ci-lb">Windows 10 / 11</div><div class="ci-sb">x64 · Both versions</div></div></div>
+      <div class="ci reveal d1"><div class="ci-ic">💡</div><div><div class="ci-lb" data-t="c1">Fără Runtime Extern</div><div class="ci-sb">.NET bundled in EXE</div></div></div>
+      <div class="ci reveal d2"><div class="ci-ic">⚙️</div><div><div class="ci-lb">Intel / AMD</div><div class="ci-sb">Any x64 processor</div></div></div>
+      <div class="ci reveal d3"><div class="ci-ic">🛡️</div><div><div class="ci-lb" data-t="c2">Admin Required</div><div class="ci-sb">Registry + Services</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="border-top:1px solid var(--border)">
+  <div class="wrap">
+    <div class="sec-head reveal"><div class="eyebrow" data-t="fey">Siguranță</div><h2 class="sec-title" data-t="fti">Întrebări<br>Frecvente</h2></div>
+    <div class="faq-lay">
+      <div class="acc">
+        <div class="ai op"><button class="ab2" onclick="tA(this)"><span data-t="q1q">Este sigur cu Anti-Cheat?</span><div class="ai-ic">+</div></button><div class="ab3" style="max-height:200px"><div class="ab4" data-t="q1a">Nu modificăm memoria jocurilor, nu injectăm DLL-uri, nu atingem executabile sau drivere. Optimizăm exclusiv setări native Windows — 100% compatibil cu Vanguard, EAC și BattlEye.</div></div></div>
+        <div class="ai"><button class="ab2" onclick="tA(this)"><span data-t="q2q">Cum revin la starea anterioară?</span><div class="ai-ic">+</div></button><div class="ab3"><div class="ab4" data-t="q2a">3 metode: (1) Windows System Restore → punctul FPSOptimizer_YYYYMMDD; (2) dublu-click pe fișierul .REG salvat pe Desktop; (3) re-activează serviciile via services.msc cu fișierul .CSV de pe Desktop.</div></div></div>
+        <div class="ai"><button class="ab2" onclick="tA(this)"><span data-t="q3q">Ce modifică exact aplicația?</span><div class="ai-ic">+</div></button><div class="ab3"><div class="ab4" data-t="q3a">Registry Windows (power settings, SystemResponsiveness, Win32Priority, GPU Priority), stări servicii de sistem, power plan (Ultimate Performance), setări de rețea (Nagle, QoS) și opțional dezinstalare bloatware prin PowerShell nativ.</div></div></div>
+        <div class="ai"><button class="ab2" onclick="tA(this)"><span data-t="q4q">Modifică BIOS, overclocking sau drivere?</span><div class="ai-ic">+</div></button><div class="ab3"><div class="ab4" data-t="q4a">Nu. Zero modificări BIOS, frecvențe, tensiuni sau drivere. Toate operațiunile sunt strict la nivel de software Windows — registry, servicii și power settings. Nicio modificare de firmware.</div></div></div>
+        <div class="ai"><button class="ab2" onclick="tA(this)"><span data-t="q5q">Cum compilez din sursă?</span><div class="ai-ic">+</div></button><div class="ab3"><div class="ab4" data-t="q5a">Clonează repo-ul, deschide FPSOptimizer.sln în Visual Studio sau: dotnet publish -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true — output în bin\Release\net8.0-windows\win-x64\publish\</div></div></div>
+      </div>
+      <div class="reveal d1">
+        <div class="inst">
+          <h3 data-t="iti">Ghid de Instalare</h3>
+          <div class="isteps">
+            <div class="is"><div class="is-n">01</div><div class="is-t" data-t="i1">Descarcă <strong>FPS.Optimizer.v3.0.4.exe</strong> din Releases. Verifică SHA-256 cu cel afișat pe pagină.</div></div>
+            <div class="is"><div class="is-n">02</div><div class="is-t" data-t="i2">Click dreapta → <strong>Run as Administrator</strong>. Necesar pentru registry + servicii.</div></div>
+            <div class="is"><div class="is-n">03</div><div class="is-t" data-t="i3">Pasul 3 creează automat <strong>Restore Point + .REG + .CSV</strong> pe Desktop.</div></div>
+            <div class="is"><div class="is-n">04</div><div class="is-t" data-t="i4">Alege <strong>Safe</strong> (4), <strong>Balanced</strong> (8) sau <strong>Gaming Hardcore</strong> (13 module). Poți customiza individual.</div></div>
+            <div class="is"><div class="is-n">05</div><div class="is-t" data-t="i5">Urmărește live log-ul. La final, <strong>repornește PC-ul</strong> pentru kernel &amp; servicii.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <div class="fn"><div class="fn-ic">⚠️</div><div class="fn-t"><strong>Legal Notice:</strong> <span data-t="disc">Staark-Dev nu este responsabil pentru daune aduse sistemului. Backup-ul automat este inclus, dar verificați întotdeauna codul sursă înainte de utilizare.</span></div></div>
+    <div class="fb">
+      <div class="fl">FPS<span>OPTIMIZER</span> · Staark-Dev</div>
+      <div class="fc">© 2026 // C# · .NET 8 · WPF // MIT // Romania // optimize.staark-app.cloud</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const CFG={hash:"6e876896f73efb40926ff4de37132755d3764b96f594eb0719b4f37e5cef22e7",vt:"https://www.virustotal.com/gui/file/6e876896f73efb40926ff4de37132755d3764b96f594eb0719b4f37e5cef22e7"};
+document.getElementById('hd').textContent=CFG.hash.slice(0,12)+'...'+CFG.hash.slice(-4);
+document.getElementById('vtl').href=CFG.vt;
+
+const T={
+en:{n1:'Wizard',n2:'Profiles',n3:'Modules',n4:'Interface',n5:'Results',n6:'FAQ',badge:'v3.0.4 — Stable Build — SHA-256 Verified',hl1:'UNLEASH',hl2:'LIMITLESS',hl3:'FPS.',hsub:'Open-source C# / WPF utility for Windows — 7-step guided wizard, 13 optimization modules, triple auto-backup and restore point before any change.',hb1:'↓ &nbsp;Download Optimizer',hb2:'View Source',s1:'Optimization Modules',s2:'Wizard Steps',s3:'Services Disabled',s4:'Bloatware Apps Removed',s5:'AV Scanners: Clean',aey:'Philosophy',ati:'Safe by<br>Design',b1e:'Open Source · C#',b1t:'Total Transparency',b1d:"Every registry edit, service suspension and app removal is publicly auditable on GitHub. The C# code is fully open — nothing is hidden.",b2e:'Failsafe',b2t:'Triple Auto-Backup',b2d:'Before any execution: Windows Restore Point, .REG export on Desktop, .CSV services snapshot. 3 independent revert methods.',b3e:'Anti-Cheat · No Overclocking',b3t:'100% Safe — No BIOS, No Drivers, No Overclocking',b3d:"We don't modify game memory, inject DLLs, touch drivers or change BIOS/frequencies. We exclusively tune native Windows settings — compatible with Vanguard, EAC and BattlEye.",wey:'App Flow',wti:'7-Step<br>Wizard',wsu:'Welcome → Scan → Backup → Profile → Configure → Execute → Done',w1l:'Welcome',w1d:'Intro & feature overview',w2l:'System Scan',w2d:'CPU, GPU, RAM,\nSSD/HDD, OS, power plan',w3l:'Backup',w3d:'Restore Point\n+ .REG + .CSV',w4l:'Profile',w4d:'Safe / Balanced\n/ Gaming Hardcore',w5l:'Configure',w5d:'Fine-tune modules\nindividually',w6l:'Execute',w6d:'Real-time\ncolored live log',w7l:'Done',w7d:'Next steps\n& restart',pey:'Presets',pti:'Choose Your<br>Profile',p1n:'Safe',p1m:'4 MODULES ACTIVE',p1d:'Zero risk. High-impact tweaks with no negative consequences. Ideal for users who want a small boost without major changes.',p1a:'Ultimate Performance Power Plan',p1b:'CPU Core Parking disabled',p1c:'RAM kernel lock',p1e:'Registry FPS Tweaks',p2n:'Balanced',p2m:'8 MODULES ACTIVE',p2d:'Recommended for most users. Perfect balance between performance and stability. Tested on i5-13420H / 48GB RAM.',p2a:'All Safe modules',p2b:'GPU & DirectX Priority 8',p2c:'Network Latency Minimum',p2e:'Telemetry & Tracking Off',p2f:'Visual Effects — Performance',p3n:'Gaming Hardcore',p3m:'13 MODULES — MAXIMUM FPS',p3d:'All 13 modules active. Disables 23 services and removes 35+ bloatware apps. Medium risk — auto-backup included.',p3a:'All Balanced modules',p3b:'23 services disabled',p3c:'35+ bloatware apps removed',p3e:'Telemetry tasks disabled',p3f:'Temp / DNS / WinSxS cleanup',mey:'Engineering',mti:'All 13<br>Modules',m1:'Ultimate Performance Power Plan',m2:'CPU Optimization — Core Parking off, Boost max',m3:'RAM Optimization — lock kernel in RAM',m4:'SSD/HDD Storage Optimization — TRIM, NTFS',m5:'GPU & DirectX Optimization — Priority 8, GPU Scheduling',m6:'Registry FPS Tweaks — SystemResponsiveness, Win32Priority',m7:'Network — Minimum Latency (Nagle off, QoS 20% freed)',m8:'Visual Effects — Maximum Performance Mode',m9:'Telemetry & Tracking — Fully Disabled',m10:'Disable 23 Unnecessary Background Services',m11:'Remove 35+ Preinstalled Bloatware Apps',m12:'Disable Scheduled Telemetry Tasks',m13:'Clean Temp Files, DNS Cache, WinSxS temp',gey:'UI Preview',gti:'App<br>Interface',gsu:'7 WPF pages · Bilingual RO/EN · Live execution log with colors · Dark theme',bey:'Real Data',bti:'Verified<br>Performance',bsu:'// Balanced Profile · i5-13420H 2.10GHz · 48GB RAM · Windows 11 x64',c1:'No Runtime Needed',c2:'Admin Required',fey:'Safety',fti:'FAQ',q1q:'Is it safe with Anti-Cheat?',q1a:"We don't modify game memory, inject DLLs, touch executables or drivers. We exclusively tune native Windows settings — 100% compatible with Vanguard, EAC and BattlEye.",q2q:'How do I revert changes?',q2a:'3 methods: (1) Windows System Restore → FPSOptimizer_YYYYMMDD point; (2) double-click the .REG file auto-saved to Desktop; (3) re-enable services via services.msc using the .CSV file from Desktop.',q3q:'What exactly does it modify?',q3a:'Windows registry (power settings, SystemResponsiveness, Win32Priority, GPU Priority), system service states, power plan (Ultimate Performance), network settings (Nagle, QoS) and optionally bloatware removal via native PowerShell.',q4q:'Does it modify BIOS, overclock or drivers?',q4a:'No. Zero BIOS, frequency, voltage or driver changes. All operations are at the Windows software level — registry, services and power settings only. No firmware modifications.',q5q:'How do I build from source?',q5a:'Clone the repo, open FPSOptimizer.sln in Visual Studio or: dotnet publish -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true — output in bin\\Release\\net8.0-windows\\win-x64\\publish\\',iti:'Installation Guide',i1:'Download <strong>FPS.Optimizer.v3.0.4.exe</strong> from Releases. Verify SHA-256 against the one on this page.',i2:'Right-click → <strong>Run as Administrator</strong>. Required for registry + services access.',i3:'Step 3 auto-creates <strong>Restore Point + .REG + .CSV</strong> on Desktop.',i4:'Choose <strong>Safe</strong> (4), <strong>Balanced</strong> (8) or <strong>Gaming Hardcore</strong> (13 modules). Customize individually.',i5:'Watch the live log. When done, <strong>restart your PC</strong> to apply kernel & service changes.',disc:'Staark-Dev is not responsible for system damage. Auto-backup is included, but always verify source code before use.'},
+ro:{n1:'Wizard',n2:'Profile',n3:'Module',n4:'Interfață',n5:'Rezultate',n6:'FAQ',badge:'v3.0.4 — Build Stabil — SHA-256 Verificat',hl1:'UNLEASH',hl2:'LIMITLESS',hl3:'FPS.',hsub:'Utilitar open-source C# / WPF pentru Windows — wizard ghidat în 7 pași, 13 module de optimizare, backup triplu automat și restore point înainte de orice modificare.',hb1:'↓ &nbsp;Download Optimizer',hb2:'View Source',s1:'Module de Optimizare',s2:'Pași Wizard',s3:'Servicii Dezactivate',s4:'Aplicații Bloatware Eliminate',s5:'Scanere AV: Clean',aey:'Filozofie',ati:'Sigur prin<br>Design',b1e:'Open Source · C#',b1t:'Transparență Totală',b1d:'Fiecare modificare de regiștri, serviciu suspendat și app dezinstalat este vizibil public pe GitHub. Codul C# este complet auditat — nu ascundem nimic.',b2e:'Failsafe',b2t:'Backup Triplu Automat',b2d:'Înainte de execuție: Restore Point Windows, export .REG pe Desktop și snapshot .CSV al serviciilor. 3 metode independente de revenire.',b3e:'Anti-Cheat · Fără Overclocking',b3t:'100% Safe — Fără BIOS, Fără Drivere, Fără Overclocking',b3d:'Nu modificăm memoria jocurilor, nu injectăm DLL-uri, nu atingem drivere, nu modificăm BIOS sau frecvențe. Optimizăm exclusiv setări native Windows — compatibil cu Vanguard, EAC și BattlEye.',wey:'Flow Aplicație',wti:'Wizard în<br>7 Pași',wsu:'Welcome → Scan → Backup → Profile → Configure → Execute → Done',w1l:'Welcome',w1d:'Intro & prezentare funcționalități',w2l:'System Scan',w2d:'CPU, GPU, RAM,\nSSD/HDD, OS, power plan',w3l:'Backup',w3d:'Restore Point\n+ .REG + .CSV',w4l:'Profile',w4d:'Safe / Balanced\n/ Gaming Hardcore',w5l:'Configure',w5d:'Customizare module\nindividuale',w6l:'Execute',w6d:'Live log colorat\nîn timp real',w7l:'Done',w7d:'Pași următori\n& repornire',pey:'Preset-uri',pti:'Alege Profilul<br>Potrivit',p1n:'Safe',p1m:'4 MODULE ACTIVE',p1d:'Zero risc. Tweak-uri cu impact ridicat și nicio consecință negativă. Ideal pentru utilizatori care vor un mic boost fără modificări majore.',p1a:'Ultimate Performance Power Plan',p1b:'CPU Core Parking dezactivat',p1c:'RAM kernel lock',p1e:'Registry FPS Tweaks',p2n:'Balanced',p2m:'8 MODULE ACTIVE',p2d:'Recomandat pentru majoritatea utilizatorilor. Echilibru perfect între câștig și stabilitate. Testat pe i5-13420H / 48GB RAM.',p2a:'Toate modulele Safe',p2b:'GPU & DirectX Priority 8',p2c:'Network Latency Minimum',p2e:'Telemetry & Tracking dezactivat',p2f:'Visual Effects — Performance',p3n:'Gaming Hardcore',p3m:'13 MODULE — MAXIMUM FPS',p3d:'Toate cele 13 module active. Include dezactivarea a 23 servicii și eliminarea a 35+ bloatware apps. Risc mediu — backup automat inclus.',p3a:'Toate modulele Balanced',p3b:'23 servicii dezactivate',p3c:'35+ bloatware apps eliminate',p3e:'Telemetry tasks dezactivate',p3f:'Temp / DNS / WinSxS cleanup',mey:'Inginerie',mti:'Cele 13<br>Module',m1:'Ultimate Performance Power Plan',m2:'CPU Optimization — Core Parking off, Boost max',m3:'RAM Optimization — kernel lock în RAM',m4:'SSD/HDD Storage Optimization — TRIM, NTFS',m5:'GPU & DirectX Optimization — Priority 8, GPU Scheduling',m6:'Registry FPS Tweaks — SystemResponsiveness, Win32Priority',m7:'Network — Minimum Latency (Nagle off, QoS 20% eliberat)',m8:'Visual Effects — Mod Performanță Maximă',m9:'Telemetry & Tracking — Complet Dezactivat',m10:'Dezactivare 23 Servicii Background Inutile',m11:'Eliminare 35+ Aplicații Bloatware Preinstalate',m12:'Dezactivare Taskuri Telemetry Programate',m13:'Curățare Temp Files, DNS Cache, WinSxS temp',gey:'UI Preview',gti:'Interfața<br>Aplicației',gsu:'7 pagini WPF · Bilingv RO/EN · Live execution log cu culori · Dark theme',bey:'Date Reale',bti:'Performanță<br>Verificată',bsu:'// Profil Balanced · i5-13420H 2.10GHz · 48GB RAM · Windows 11 x64',c1:'Fără Runtime Extern',c2:'Admin Necesar',fey:'Siguranță',fti:'Întrebări<br>Frecvente',q1q:'Este sigur cu Anti-Cheat?',q1a:'Nu modificăm memoria jocurilor, nu injectăm DLL-uri, nu atingem fișierele executabile sau drivere. Optimizăm exclusiv setări native Windows — 100% compatibil cu Vanguard, EAC și BattlEye.',q2q:'Cum revin la starea anterioară?',q2a:'3 metode: (1) Windows System Restore → punctul FPSOptimizer_YYYYMMDD; (2) dublu-click pe fișierul .REG de pe Desktop; (3) re-activează serviciile via services.msc cu fișierul .CSV de pe Desktop.',q3q:'Ce modifică exact aplicația?',q3a:'Registry Windows (power settings, SystemResponsiveness, Win32Priority, GPU Priority), stări servicii de sistem, power plan (Ultimate Performance), setări de rețea (Nagle, QoS) și opțional dezinstalare bloatware prin PowerShell nativ.',q4q:'Modifică BIOS, overclocking sau drivere?',q4a:'Nu. Zero modificări BIOS, frecvențe, tensiuni sau drivere. Toate operațiunile sunt strict la nivel de software Windows — registry, servicii și power settings. Nicio modificare de firmware.',q5q:'Cum compilez din sursă?',q5a:'Clonează repo-ul, deschide FPSOptimizer.sln în Visual Studio sau: dotnet publish -c Release -r win-x64 --self-contained true /p:PublishSingleFile=true — output în bin\\Release\\net8.0-windows\\win-x64\\publish\\',iti:'Ghid de Instalare',i1:'Descarcă <strong>FPS.Optimizer.v3.0.4.exe</strong> din Releases. Verifică SHA-256 cu cel afișat pe pagină.',i2:'Click dreapta → <strong>Run as Administrator</strong>. Necesar pentru registry + servicii.',i3:'Pasul 3 creează automat <strong>Restore Point + .REG + .CSV</strong> pe Desktop.',i4:'Alege <strong>Safe</strong> (4), <strong>Balanced</strong> (8) sau <strong>Gaming Hardcore</strong> (13 module). Poți customiza individual.',i5:'Urmărește live log-ul. La final, <strong>repornește PC-ul</strong> pentru kernel & servicii.',disc:'Staark-Dev nu este responsabil pentru daune aduse sistemului. Backup-ul automat este inclus, dar verificați întotdeauna codul sursă înainte de utilizare.'}
+};
+
+let L='ro';
+function aL(){document.querySelectorAll('[data-t]').forEach(e=>{const k=e.getAttribute('data-t');if(T[L][k]!==undefined)e.innerHTML=T[L][k]});document.getElementById('lb').textContent=L==='ro'?'EN':'RO'}
+function tL(){L=L==='ro'?'en':'ro';aL()}
+aL();
+
+function tA(btn){const i=btn.closest('.ai'),b=i.querySelector('.ab3'),o=i.classList.contains('op');document.querySelectorAll('.ai').forEach(x=>{x.classList.remove('op');x.querySelector('.ab3').style.maxHeight='0'});if(!o){i.classList.add('op');b.style.maxHeight=b.scrollHeight+'px'}}
+document.querySelector('.ai .ab3').style.maxHeight='200px';
+
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(e=>ro.observe(e));
+
+function ac(el){const t=+el.dataset.count,p=el.dataset.prefix||'',s=el.dataset.suffix||'',d=1400,st=performance.now();const f=n=>{const pc=Math.min((n-st)/d,1),e=1-Math.pow(1-pc,3);el.textContent=p+Math.round(e*t)+s;if(pc<1)requestAnimationFrame(f)};requestAnimationFrame(f)}
+new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('[data-count]').forEach(ac);o.unobserve(e.target)}}),{threshold:.3}).observe(document.getElementById('stats'));
+
+new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.bf').forEach(b=>setTimeout(()=>b.style.width=b.dataset.width+'%',200));o.unobserve(e.target)}}),{threshold:.2}).observe(document.getElementById('benchmarks'));
+
+const nas=document.querySelectorAll('.nav-links a');
+document.querySelectorAll('section[id]').forEach(s=>{new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)nas.forEach(a=>{a.style.color=a.getAttribute('href')==='#'+e.target.id?'var(--c)':''})}),{rootMargin:'-40% 0px -40% 0px'}).observe(s)});
+</script>
+</body>
+</html>
