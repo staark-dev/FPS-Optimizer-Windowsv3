@@ -3,97 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FPS Optimizer v3 | Performanță Maximă</title>
+    <title>FPS Optimizer v3 | Staark-Dev | Performanță Maximă Windows</title>
+    
+    <meta name="description" content="Optimizează-ți PC-ul pentru gaming competitiv cu FPS Optimizer v3 de la Staark-Dev. Open-source, sigur, reduce latența și crește FPS-ul în Windows 10/11.">
+    <meta property="og:title" content="FPS Optimizer v3 | Deblochează Potențialul PC-ului Tău">
+    <meta property="og:description" content="Reduce procesele inutile, optimizează setările sistemului și câștigă până la 35% mai multă performanță în jocuri.">
+    <meta property="og:image" content="https://optimize.staark-app.cloud/assets/screenshot-optimized.png"> <meta property="og:url" content="https://optimize.staark-app.cloud/">
+    <meta name="twitter:card" content="summary_large_image">
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    
     <style>
         body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        .glow-effect { box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
-        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .font-gaming { font-family: 'Rajdhani', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; }
+        .glow-effect { box-shadow: 0 0 25px rgba(59, 130, 246, 0.4); }
+        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(51, 65, 85, 0.5); }
+        
+        /* Stiluri pentru Slider-ul Înainte/După (CSS Pure) */
+        .comparison-slider { position: relative; width: 100%; overflow: hidden; border-radius: 1rem; border: 2px solid #334155; }
+        .comparison-slider img { width: 100%; height: auto; display: block; }
+        .comparison-slider .resize { position: absolute; top: 0; left: 0; height: 100%; width: 50%; overflow: hidden; }
+        .comparison-slider .handle { 
+            position: absolute; top: 0; left: 50%; bottom: 0; width: 4px; background: #3b82f6; 
+            cursor: ew-resize; transform: translateX(-50%); transition: left 0.1s ease;
+        }
+        .comparison-slider .handle::after {
+            content: "↔"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 40px; h-height: 40px; background: #3b82f6; color: white; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
     </style>
 </head>
-<body class="bg-slate-950 text-white selection:bg-blue-500/30">
+<body class="bg-slate-950 text-slate-100 selection:bg-blue-500/30">
 
-    <nav class="sticky top-0 z-50 glass border-b border-slate-800">
-        <div class="flex items-center justify-between px-8 py-4 max-w-7xl mx-auto">
-            <div class="text-xl font-extrabold tracking-tighter flex items-center gap-2">
-                <span class="bg-blue-600 p-1 rounded text-sm">⚡</span> FPS<span class="text-blue-500">OPTIMIZER</span>
-            </div>
-            <div class="hidden md:flex gap-8 text-slate-400 font-medium text-sm">
+    <nav class="sticky top-0 z-50 glass">
+        <div class="flex items-center justify-between px-6 py-3 max-w-7xl mx-auto">
+            <a href="#" class="text-xl font-extrabold tracking-tighter flex items-center gap-2 font-gaming">
+                <span class="bg-blue-600 text-white p-1.5 rounded-md text-sm">⚡</span> FPS<span class="text-blue-500">OPTIMIZER</span>
+            </a>
+            <div class="hidden md:flex gap-6 text-slate-400 font-medium text-sm">
+                <a href="#galerie" class="hover:text-white transition">Galerie</a>
+                <a href="#detalii" class="hover:text-white transition">Detalii</a>
                 <a href="#benchmarks" class="hover:text-white transition">Benchmarks</a>
                 <a href="#disclaimer" class="hover:text-white transition">Siguranță</a>
-                <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3" target="_blank" id="star-count" class="text-blue-400 hover:text-blue-300 transition italic">Încărcare stele GitHub...</a>
+                <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3" target="_blank" id="star-count" class="text-blue-400 hover:text-blue-300 transition italic font-gaming">Stele...</a>
             </div>
-            <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3/releases" class="bg-white text-black px-4 py-2 rounded-lg font-bold text-sm hover:bg-blue-500 hover:text-white transition-all">
-                Download
+            <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3/releases/latest" class="bg-white text-black px-4 py-2 rounded-lg font-bold text-sm hover:bg-blue-500 hover:text-white transition-all transform hover:scale-105">
+                Download Free
             </a>
         </div>
     </nav>
 
-    <header class="relative pt-20 pb-20 overflow-hidden">
+    <header class="relative pt-24 pb-16 overflow-hidden">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10">
-            <div class="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-600/10 blur-[120px] rounded-full"></div>
+            <div class="absolute top-[-15%] left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-blue-600/15 blur-[140px] rounded-full"></div>
         </div>
 
         <div class="max-w-7xl mx-auto px-8 text-center">
-            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
-                Mai puține procese.<br>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-sm font-medium mb-8 font-gaming">
+                v3.0.4 - Stabil & Verificat
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
+                Mai puțină latență.<br>
                 <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-300">Mai multe FPS-uri.</span>
             </h1>
-            <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-10">
-                Optimizează-ți sistemul Windows pentru gaming competitiv. Elimină latența și deblochează resursele ascunse ale procesorului tău.
+            <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                Deblocează resursele ascunse ale PC-ului tău. FPS Optimizer v3 elimină procesele Windows inutile și optimizează setările pentru o experiență de gaming fluidă și competitivă.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3/archive/refs/heads/main.zip" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 rounded-xl font-bold text-lg transition-all glow-effect">Descarcă v3.0</a>
-                <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3" target="_blank" class="px-8 py-4 bg-slate-800 border border-slate-700 rounded-xl font-bold text-lg hover:bg-slate-700 transition-all">GitHub Source</a>
+            <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
+                <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3/archive/refs/heads/main.zip" class="px-10 py-4 bg-blue-600 hover:bg-blue-500 rounded-xl font-bold text-lg transition-all glow-effect transform hover:scale-105">Descarcă Acum</a>
+                <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3" target="_blank" class="px-10 py-4 bg-slate-800 border border-slate-700 rounded-xl font-bold text-lg hover:bg-slate-700 transition-all">Sursă GitHub</a>
             </div>
         </div>
     </header>
 
-    <section id="benchmarks" class="max-w-5xl mx-auto px-8 py-20">
+    <section id="galerie" class="max-w-6xl mx-auto px-6 py-24">
         <div class="text-center mb-16">
-            <h2 class="text-3xl font-bold mb-4 text-blue-500 uppercase tracking-widest text-sm">Performanță Reală</h2>
-            <p class="text-2xl font-bold">Rezultate obținute după optimizare</p>
+            <h2 class="text-4xl font-extrabold tracking-tight mb-4">Impactul Optimizării</h2>
+            <p class="text-lg text-slate-400">Trage de slider pentru a compara performanța.</p>
+        </div>
+
+        <div class="grid md:grid-cols-5 gap-8 items-center">
+            <div class="md:col-span-3">
+                <div class="comparison-slider group">
+                    <img src="assets/screenshot-optimized.png" alt="Sistem Optimizat">
+                    
+                    <div class="resize group-hover:w-[10%] transition-all duration-500 ease-in-out">
+                        <img src="assets/screenshot-default.png" alt="Sistem Implicit" class="max-w-none w-full">
+                        <span class="absolute top-4 left-4 bg-red-600/80 text-white px-3 py-1 text-xs font-bold rounded">Înainte (Default)</span>
+                    </div>
+                    
+                    <div class="handle group-hover:left-[10%] transition-all duration-500 ease-in-out"></div>
+                    <span class="absolute top-4 right-4 bg-green-600/80 text-white px-3 py-1 text-xs font-bold rounded">După (FPS Optimizer v3)</span>
+                </div>
+                <p class="text-xs text-slate-600 mt-3 text-center">*Imaginile sunt simulări bazate pe rezultate reale. Performanța variază în funcție de hardware.</p>
+            </div>
+            
+            <div class="md:col-span-2 space-y-6 bg-slate-900 p-8 rounded-2xl border border-slate-800">
+                <h3 class="text-2xl font-bold">Ce vei observa?</h3>
+                <ul class="space-y-4 text-slate-300 list-disc list-inside marker:text-blue-500">
+                    <li>FPS mediu mult mai ridicat în titluri competitive.</li>
+                    <li>Mai puține "stutter-e" (agățări) în momentele intense.</li>
+                    <li>Utilizare redusă a memoriei RAM în Idle.</li>
+                    <li>Sistem de operare mai rapid și mai receptiv.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="detalii" class="max-w-7xl mx-auto px-6 py-24 border-t border-slate-900">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-extrabold tracking-tight mb-4">Ce face sub capotă?</h2>
+            <p class="text-lg text-slate-400">Peste 100 de optimizări specifice, organizate în 4 piloni.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <div class="md:col-span-2 bg-slate-900 border border-slate-800 p-8 rounded-3xl hover:border-blue-500/50 transition duration-300 flex flex-col justify-between">
+                <div>
+                    <div class="text-4xl mb-5">🗑️</div>
+                    <h3 class="text-2xl font-bold mb-4 font-gaming text-blue-400">Windows Debloat Inteligent</h3>
+                    <p class="text-slate-400 leading-relaxed mb-6">Elimină telemetria, Cortana, aplicațiile OneDrive preinstalate și dezactivează serviciile de fundal inutile care consumă procesor și RAM în timp ce te joci.</p>
+                </div>
+                <div class="flex flex-wrap gap-2 text-xs font-mono text-blue-300">
+                    <span class="bg-blue-950/50 px-2 py-1 rounded">- Disable Telemetry</span>
+                    <span class="bg-blue-950/50 px-2 py-1 rounded">- Remove Cortana</span>
+                    <span class="bg-blue-950/50 px-2 py-1 rounded">- Fix GameDVR</span>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-slate-900 to-blue-950/30 border border-slate-800 p-8 rounded-3xl group hover:border-blue-500 transition duration-300">
+                <div class="text-4xl mb-5">⚙️</div>
+                <h3 class="text-2xl font-bold mb-4 font-gaming">Registry Tweaks</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Optimizează peste 50 de chei de regiștri pentru a reduce latența mouse-ului/tastaturii (input lag) și a îmbunătăți prioritatea proceselor de joc.</p>
+            </div>
+
+            <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl hover:border-blue-500/50 transition duration-300">
+                <div class="text-4xl mb-5">🧹</div>
+                <h3 class="text-2xl font-bold mb-4 font-gaming text-cyan-400">RAM Cleaner Integrat</h3>
+                <p class="text-slate-400 text-sm leading-relaxed">Golește cache-ul sistemului și forțează eliberarea memoriei RAM neutilizate înainte de lansarea jocului, prevenind "agățările" cauzate de lipsa de memorie.</p>
+            </div>
+
+            <div class="md:col-span-2 bg-slate-900 border border-slate-800 p-8 rounded-3xl flex flex-col md:flex-row items-center gap-6">
+                <div class="text-4xl">🛡️</div>
+                <div class="flex-1 text-center md:text-left">
+                    <h3 class="text-xl font-bold mb-2">Compatibilitate Extinsă</h3>
+                    <p class="text-slate-400 text-sm mb-4">Verificat și optimizat pentru funcționare sigură pe:</p>
+                    <div class="flex flex-wrap gap-2 justify-center md:justify-start">
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs border border-slate-700 font-medium">Windows 10 (Toate versiunile)</span>
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs border border-slate-700 font-medium">Windows 11 (22H2/23H2)</span>
+                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs border border-slate-700 font-medium text-blue-400">Sisteme x64</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="benchmarks" class="max-w-5xl mx-auto px-8 py-24 border-t border-slate-900">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold mb-4 text-blue-500 font-gaming">Performanță Reală</h2>
+            <p class="text-3xl font-extrabold tracking-tight">Rezultate obținute în teste</p>
         </div>
 
         <div class="grid gap-8">
-            <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 transform hover:border-green-500/30 transition duration-300 hover:shadow-lg">
                 <div class="flex justify-between mb-4 items-end">
-                    <span class="text-xl font-bold">Valorant</span>
-                    <span class="text-green-400 font-bold">+28% Performanță</span>
+                    <span class="text-2xl font-bold font-gaming">Valorant (Low Settings)</span>
+                    <span class="text-green-400 font-bold font-gaming">+28% Performanță</span>
                 </div>
                 <div class="space-y-4">
                     <div>
                         <div class="flex justify-between text-xs text-slate-500 mb-1"><span>Default Windows</span> <span>144 FPS</span></div>
-                        <div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
-                            <div class="bg-slate-600 h-full" style="width: 70%"></div>
+                        <div class="w-full bg-slate-800 h-3.5 rounded-full overflow-hidden">
+                            <div class="bg-slate-600 h-full rounded-full" style="width: 70%"></div>
                         </div>
                     </div>
                     <div>
-                        <div class="flex justify-between text-xs text-blue-400 mb-1"><span>Optimizat cu v3</span> <span>185 FPS</span></div>
-                        <div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
-                            <div class="bg-blue-500 h-full glow-effect" style="width: 90%"></div>
+                        <div class="flex justify-between text-xs text-blue-400 mb-1"><span>Optimizat cu v3</span> <span class="font-bold">185 FPS</span></div>
+                        <div class="w-full bg-slate-800 h-3.5 rounded-full overflow-hidden">
+                            <div class="bg-blue-500 h-full glow-effect rounded-full animate-pulse" style="width: 92%"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800">
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 transform hover:border-green-500/30 transition duration-300 hover:shadow-lg">
                 <div class="flex justify-between mb-4 items-end">
-                    <span class="text-xl font-bold">Counter-Strike 2</span>
-                    <span class="text-green-400 font-bold">+35% Performanță</span>
+                    <span class="text-2xl font-bold font-gaming">Counter-Strike 2</span>
+                    <span class="text-green-400 font-bold font-gaming">+35% Performanță</span>
                 </div>
                 <div class="space-y-4">
                     <div>
                         <div class="flex justify-between text-xs text-slate-500 mb-1"><span>Default Windows</span> <span>120 FPS</span></div>
-                        <div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
-                            <div class="bg-slate-600 h-full" style="width: 60%"></div>
+                        <div class="w-full bg-slate-800 h-3.5 rounded-full overflow-hidden">
+                            <div class="bg-slate-600 h-full rounded-full" style="width: 62%"></div>
                         </div>
                     </div>
                     <div>
-                        <div class="flex justify-between text-xs text-blue-400 mb-1"><span>Optimizat cu v3</span> <span>162 FPS</span></div>
-                        <div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
-                            <div class="bg-blue-500 h-full glow-effect" style="width: 85%"></div>
+                        <div class="flex justify-between text-xs text-blue-400 mb-1"><span>Optimizat cu v3</span> <span class="font-bold">162 FPS</span></div>
+                        <div class="w-full bg-slate-800 h-3.5 rounded-full overflow-hidden">
+                            <div class="bg-blue-500 h-full glow-effect rounded-full animate-pulse" style="width: 88%"></div>
                         </div>
                     </div>
                 </div>
@@ -101,27 +216,43 @@
         </div>
     </section>
 
-    <section id="disclaimer" class="max-w-4xl mx-auto px-8 py-20 border-t border-slate-900">
-        <div class="bg-amber-500/5 border border-amber-500/20 p-8 rounded-2xl flex flex-col md:flex-row gap-6 items-center">
-            <div class="text-amber-500 bg-amber-500/10 p-4 rounded-full text-3xl">⚠️</div>
-            <div>
-                <h3 class="text-xl font-bold text-amber-500 mb-2">Atenție & Disclaimer</h3>
-                <p class="text-slate-400 text-sm leading-relaxed">
-                    Utilizarea acestui program implică modificări la nivel de Registry și servicii de sistem. Deși este sigur și open-source, nu ne asumăm răspunderea pentru orice instabilitate software. Recomandăm crearea unui <strong>System Restore Point</strong> înainte de utilizare.
-                </p>
+    <section id="disclaimer" class="max-w-4xl mx-auto px-6 py-24 border-t border-slate-900">
+        <div class="relative group">
+            <div class="absolute -inset-1 bg-gradient-to-r from-amber-500/20 to-orange-500/20 rounded-3xl blur opacity-25 transition duration-1000 group-hover:opacity-40"></div>
+            <div class="relative bg-slate-900 border border-amber-500/20 p-8 rounded-3xl flex flex-col md:flex-row gap-6 items-center">
+                <div class="text-amber-500 bg-amber-500/10 p-5 rounded-2xl text-3xl">⚠️</div>
+                <div>
+                    <h3 class="text-2xl font-bold text-amber-500 mb-3 font-gaming">Atenție & Siguranță</h3>
+                    <div class="space-y-4 text-slate-400 text-sm leading-relaxed">
+                        <p>
+                            FPS Optimizer v3 modifică regiștrii și serviciile de sistem. Deși este bazat pe scripturi transparente (open-source) și verificat, <strong>utilizarea lui se face pe propria răspundere</strong>.
+                        </p>
+                        <p>
+                            Dezvoltatorul nu își asumă responsabilitatea pentru eventuale pierderi de date sau instabilități software. Proiectul este oferit "as is".
+                        </p>
+                        <div class="bg-amber-950/20 p-4 rounded-xl border-l-4 border-amber-500 italic text-amber-300">
+                            Recomandare: Creați un <strong>System Restore Point</strong> înainte de a rula optimizarea pentru o revenire sigură.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <footer class="py-12 text-center text-slate-600 border-t border-slate-900 text-sm">
-        <p>© 2026 - Prezent | Creat de <a href="https://github.com/staark-dev" class="text-slate-400">Staark-Dev</a></p>
+        <p class="font-gaming">⚡ FPS Optimizer v3 | Un proiect Staark-Dev</p>
+        <p class="mt-2 text-xs">© 2024 - Prezent. Open Source sub licență MIT.</p>
+        <div class="mt-4 flex justify-center gap-4 text-slate-500">
+            <a href="https://github.com/staark-dev" class="hover:text-white transition">GitHub Profile</a>
+            <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3/issues" class="hover:text-white transition">Report Issue</a>
+        </div>
     </footer>
 
     <script>
         fetch('https://api.github.com/repos/staark-dev/FPS-Optimizer-Windowsv3')
             .then(response => response.json())
             .then(data => {
-                if(data.stargazers_count) {
+                if(data.stargazers_count !== undefined) {
                     document.getElementById('star-count').innerText = '⭐ ' + data.stargazers_count + ' GitHub Stars';
                 }
             })
