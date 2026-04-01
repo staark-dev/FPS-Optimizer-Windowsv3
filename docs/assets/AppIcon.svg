@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#080A14;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0D0F1E;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1EB4FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00E682;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Base circle -->
+  <circle cx="128" cy="128" r="120" fill="url(#bgGradient)" stroke="#232850" stroke-width="2"/>
+
+  <!-- Lightning bolt (FPS symbol) -->
+  <g transform="translate(128, 128)">
+    <!-- Outer glow -->
+    <path d="M -20 -40 L 10 -5 L -5 0 L 25 50 L -10 15 L 0 10 L -25 -35 Z"
+          fill="none" stroke="#1EB4FF" stroke-width="3" stroke-linecap="round"
+          stroke-linejoin="round" opacity="0.6" filter="blur(2)"/>
+
+    <!-- Main lightning bolt -->
+    <path d="M -20 -40 L 10 -5 L -5 0 L 25 50 L -10 15 L 0 10 L -25 -35 Z"
+          fill="url(#accentGradient)" stroke="#1EB4FF" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- FPS text in corner -->
+  <text x="128" y="165" font-size="24" font-weight="bold" fill="#1EB4FF"
+        text-anchor="middle" font-family="Arial, sans-serif" letter-spacing="2">FPS</text>
+
+  <!-- Border glow -->
+  <circle cx="128" cy="128" r="120" fill="none" stroke="#1EB4FF"
+          stroke-width="1" opacity="0.3"/>
+</svg>
