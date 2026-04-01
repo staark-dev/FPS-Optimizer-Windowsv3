@@ -1,264 +1,333 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FPS Optimizer v3 | Staark-Dev | Performanță Maximă Windows</title>
-    
-    <meta name="description" content="Optimizează-ți PC-ul pentru gaming competitiv cu FPS Optimizer v3 de la Staark-Dev. Open-source, sigur, reduce latența și crește FPS-ul în Windows 10/11.">
-    <meta property="og:title" content="FPS Optimizer v3 | Deblochează Potențialul PC-ului Tău">
-    <meta property="og:description" content="Reduce procesele inutile, optimizează setările sistemului și câștigă până la 35% mai multă performanță în jocuri.">
-    <meta property="og:image" content="https://optimize.staark-app.cloud/assets/screenshot-optimized.png"> <meta property="og:url" content="https://optimize.staark-app.cloud/">
-    <meta name="twitter:card" content="summary_large_image">
-
+    <title>FPS Optimizer v3 | Staark-Dev Ultimate Performance Suite</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        .font-gaming { font-family: 'Rajdhani', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; }
-        .glow-effect { box-shadow: 0 0 25px rgba(59, 130, 246, 0.4); }
-        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(51, 65, 85, 0.5); }
+        :root { --accent: #3b82f6; --bg-dark: #020617; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: #f8fafc; scroll-behavior: smooth; }
+        .font-gaming { font-family: 'Rajdhani', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
         
-        /* Stiluri pentru Slider-ul Înainte/După (CSS Pure) */
-        .comparison-slider { position: relative; width: 100%; overflow: hidden; border-radius: 1rem; border: 2px solid #334155; }
-        .comparison-slider img { width: 100%; height: auto; display: block; }
-        .comparison-slider .resize { position: absolute; top: 0; left: 0; height: 100%; width: 50%; overflow: hidden; }
-        .comparison-slider .handle { 
-            position: absolute; top: 0; left: 50%; bottom: 0; width: 4px; background: #3b82f6; 
-            cursor: ew-resize; transform: translateX(-50%); transition: left 0.1s ease;
-        }
-        .comparison-slider .handle::after {
-            content: "↔"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 40px; h-height: 40px; background: #3b82f6; color: white; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        }
+        /* Efecte Navigare */
+        .glass-nav { background: rgba(2, 6, 23, 0.9); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(51, 65, 85, 0.4); }
+        
+        /* Hero & Glows */
+        .hero-glow { background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.12) 0%, transparent 75%); }
+        .accent-border { border: 1px solid rgba(59, 130, 246, 0.2); }
+        
+        /* Carduri Bento Complexe */
+        .card-bento { background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(51, 65, 85, 0.3); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card-bento:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: 0 20px 40px -15px rgba(59, 130, 246, 0.3); }
+
+        /* Badge-uri Tehnice */
+        .tech-badge { background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.2); color: #93c5fd; padding: 2px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; font-family: 'JetBrains Mono'; transition: 0.2s; cursor: default; }
+        .tech-badge:hover { background: var(--accent); color: white; border-color: white; }
+
+        /* Butoane */
+        .btn-master { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); transition: 0.3s; box-shadow: 0 10px 25px -10px rgba(59, 130, 246, 0.5); }
+        .btn-master:hover { transform: scale(1.03); filter: brightness(1.1); box-shadow: 0 15px 35px -10px rgba(59, 130, 246, 0.7); }
+
+        /* Galerie */
+        .img-container { position: relative; overflow: hidden; border-radius: 1.5rem; }
+        .img-preview { transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), filter 0.6s; filter: grayscale(40%); }
+        .img-container:hover .img-preview { transform: scale(1.06); filter: grayscale(0%); }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3b82f6; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 selection:bg-blue-500/30">
+<body>
 
-    <nav class="sticky top-0 z-50 glass">
-        <div class="flex items-center justify-between px-6 py-3 max-w-7xl mx-auto">
-            <a href="#" class="text-xl font-extrabold tracking-tighter flex items-center gap-2 font-gaming">
-                <span class="bg-blue-600 text-white p-1.5 rounded-md text-sm">⚡</span> FPS<span class="text-blue-500">OPTIMIZER</span>
-            </a>
-            <div class="hidden md:flex gap-6 text-slate-400 font-medium text-sm">
-                <a href="#galerie" class="hover:text-white transition">Galerie</a>
-                <a href="#detalii" class="hover:text-white transition">Detalii</a>
-                <a href="#benchmarks" class="hover:text-white transition">Benchmarks</a>
-                <a href="#disclaimer" class="hover:text-white transition">Siguranță</a>
-                <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3" target="_blank" id="star-count" class="text-blue-400 hover:text-blue-300 transition italic font-gaming">Stele...</a>
+    <nav class="fixed w-full z-[200] glass-nav">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3 font-gaming text-2xl font-bold italic">
+                <span class="bg-blue-600 text-white px-2.5 py-1 rounded shadow-lg">⚡</span>
+                <span class="tracking-tighter">FPS<span class="text-blue-500">OPTIMIZER</span></span>
             </div>
-            <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3/releases/latest" class="bg-white text-black px-4 py-2 rounded-lg font-bold text-sm hover:bg-blue-500 hover:text-white transition-all transform hover:scale-105">
-                Download Free
-            </a>
+            
+            <div class="hidden lg:flex gap-10 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                <a href="#about" class="hover:text-blue-400 transition" data-t="nav_about">Philosophy</a>
+                <a href="#technical" class="hover:text-blue-400 transition" data-t="nav_tech">Technical Core</a>
+                <a href="#gallery" class="hover:text-blue-400 transition" data-t="nav_gal">Interface</a>
+                <a href="#benchmarks" class="hover:text-blue-400 transition" data-t="nav_bench">Benchmarks</a>
+                <a href="#faq" class="hover:text-blue-400 transition" data-t="nav_faq">FAQ & Safety</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button onclick="toggleLanguage()" class="text-[10px] font-bold border border-slate-700 px-4 py-2 rounded-xl hover:bg-slate-800 transition uppercase tracking-widest text-blue-400">
+                    <span id="lang-label">RO</span>
+                </button>
+                <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3" target="_blank" class="bg-slate-800 hover:bg-slate-700 px-6 py-2 rounded-xl font-bold text-[10px] transition uppercase font-gaming border border-slate-700">GitHub</a>
+            </div>
         </div>
     </nav>
 
-    <header class="relative pt-24 pb-16 overflow-hidden">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10">
-            <div class="absolute top-[-15%] left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-blue-600/15 blur-[140px] rounded-full"></div>
-        </div>
-
-        <div class="max-w-7xl mx-auto px-8 text-center">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-sm font-medium mb-8 font-gaming">
-                v3.0.4 - Stabil & Verificat
+    <header class="pt-48 pb-32 text-center px-6 hero-glow relative overflow-hidden">
+        <div class="max-w-5xl mx-auto relative z-10">
+            <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-emerald-500/20 bg-emerald-500/5 text-emerald-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-12 animate-pulse">
+                <span class="w-2 h-2 bg-emerald-500 rounded-full"></span>
+                v3.0.4 - Automatic Restore Point Enabled
             </div>
-            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
-                Mai puțină latență.<br>
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-300">Mai multe FPS-uri.</span>
+            <h1 class="text-6xl md:text-9xl font-extrabold tracking-tighter mb-8 italic font-gaming leading-none">
+                UNLEASH <span class="text-blue-500 italic">LIMITLESS</span> FPS.
             </h1>
-            <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-                Deblocează resursele ascunse ale PC-ului tău. FPS Optimizer v3 elimină procesele Windows inutile și optimizează setările pentru o experiență de gaming fluidă și competitivă.
+            <p class="text-slate-400 text-xl md:text-2xl mb-12 italic max-w-3xl mx-auto leading-relaxed" data-t="hero_desc">
+                An advanced open-source optimization engine designed to strip away Windows bloat, recalibrate system latency, and lock in competitive stability.
             </p>
-            <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
-                <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3/archive/refs/heads/main.zip" class="px-10 py-4 bg-blue-600 hover:bg-blue-500 rounded-xl font-bold text-lg transition-all glow-effect transform hover:scale-105">Descarcă Acum</a>
-                <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3" target="_blank" class="px-10 py-4 bg-slate-800 border border-slate-700 rounded-xl font-bold text-lg hover:bg-slate-700 transition-all">Sursă GitHub</a>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-6 items-center">
+                <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3/raw/master/Optimizer.exe" class="btn-master px-16 py-6 text-white rounded-2xl font-bold font-gaming text-2xl flex items-center gap-4">
+                    Download Optimizer.exe
+                </a>
+                <div id="star-count" class="flex items-center px-8 py-6 border border-slate-800 rounded-2xl text-slate-500 font-mono text-sm italic bg-slate-900/20">
+                    ⭐ GitHub Stars: --
+                </div>
             </div>
+            <p class="mt-8 text-[11px] text-slate-600 uppercase tracking-[0.4em] font-bold italic" data-t="hero_trust">100% Auditable Code. 0% Malicious. 100% Free.</p>
         </div>
     </header>
 
-    <section id="galerie" class="max-w-6xl mx-auto px-6 py-24">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-extrabold tracking-tight mb-4">Impactul Optimizării</h2>
-            <p class="text-lg text-slate-400">Trage de slider pentru a compara performanța.</p>
-        </div>
-
-        <div class="grid md:grid-cols-5 gap-8 items-center">
-            <div class="md:col-span-3">
-                <div class="comparison-slider group">
-                    <img src="assets/screenshot-optimized.png" alt="Sistem Optimizat">
-                    
-                    <div class="resize group-hover:w-[10%] transition-all duration-500 ease-in-out">
-                        <img src="assets/screenshot-default.png" alt="Sistem Implicit" class="max-w-none w-full">
-                        <span class="absolute top-4 left-4 bg-red-600/80 text-white px-3 py-1 text-xs font-bold rounded">Înainte (Default)</span>
-                    </div>
-                    
-                    <div class="handle group-hover:left-[10%] transition-all duration-500 ease-in-out"></div>
-                    <span class="absolute top-4 right-4 bg-green-600/80 text-white px-3 py-1 text-xs font-bold rounded">După (FPS Optimizer v3)</span>
-                </div>
-                <p class="text-xs text-slate-600 mt-3 text-center">*Imaginile sunt simulări bazate pe rezultate reale. Performanța variază în funcție de hardware.</p>
+    <section id="about" class="max-w-7xl mx-auto px-6 py-20">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="md:col-span-2 card-bento p-14 rounded-[3.5rem] relative overflow-hidden group">
+                <div class="absolute -right-10 -top-10 text-[15rem] font-bold opacity-5 italic font-gaming pointer-events-none">OSS</div>
+                <h3 class="text-4xl font-bold font-gaming text-blue-500 mb-6 italic" data-t="bento_t1">Total Transparency</h3>
+                <p class="text-slate-400 text-lg leading-relaxed italic" data-t="bento_d1">
+                    Most optimization tools are compiled "black boxes" that ask for trust without proof. Our engine is built on the philosophy of open-source. Every registry modification, service suspension, and script is publicly auditable on GitHub. We don't hide code because we have nothing to hide.
+                </p>
             </div>
-            
-            <div class="md:col-span-2 space-y-6 bg-slate-900 p-8 rounded-2xl border border-slate-800">
-                <h3 class="text-2xl font-bold">Ce vei observa?</h3>
-                <ul class="space-y-4 text-slate-300 list-disc list-inside marker:text-blue-500">
-                    <li>FPS mediu mult mai ridicat în titluri competitive.</li>
-                    <li>Mai puține "stutter-e" (agățări) în momentele intense.</li>
-                    <li>Utilizare redusă a memoriei RAM în Idle.</li>
-                    <li>Sistem de operare mai rapid și mai receptiv.</li>
+            <div class="bg-blue-600 p-12 rounded-[3.5rem] text-white flex flex-col justify-between shadow-2xl shadow-blue-900/30">
+                <h3 class="text-3xl font-bold font-gaming italic leading-tight" data-t="bento_t2">Failsafe<br>Protection</h3>
+                <p class="text-blue-100 text-sm italic leading-relaxed" data-t="bento_d2">
+                    The application automatically triggers a <strong>Windows Restore Point</strong> before any operation. If your hardware reacts unexpectedly, you can revert your system state in seconds.
+                </p>
+                <div class="mt-8 flex gap-2">
+                    <span class="bg-white/20 px-3 py-1 rounded text-[10px] font-bold font-mono">SAFE</span>
+                    <span class="bg-white/20 px-3 py-1 rounded text-[10px] font-bold font-mono">STABLE</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="technical" class="max-w-7xl mx-auto px-6 py-20 border-t border-slate-900">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-extrabold italic font-gaming" data-t="tech_title">The Optimization Core</h2>
+            <p class="text-slate-500 mt-2 italic text-sm tracking-widest uppercase" data-t="tech_sub">Deep dive into our engineering</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="card-bento p-8 rounded-3xl">
+                <h4 class="text-blue-400 font-bold mb-6 text-[11px] uppercase tracking-widest flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span> Windows Services
+                </h4>
+                <div class="flex flex-wrap gap-2">
+                    <span class="tech-badge">SysMain</span><span class="tech-badge">Search Indexer</span>
+                    <span class="tech-badge">Print Spooler</span><span class="tech-badge">Connected UI</span>
+                    <span class="tech-badge">Maps Manager</span><span class="tech-badge">Telemetry Host</span>
+                </div>
+            </div>
+            <div class="card-bento p-8 rounded-3xl">
+                <h4 class="text-blue-400 font-bold mb-6 text-[11px] uppercase tracking-widest flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span> Bloatware Removal
+                </h4>
+                <div class="flex flex-wrap gap-2">
+                    <span class="tech-badge">Cortana</span><span class="tech-badge">OneDrive</span>
+                    <span class="tech-badge">Xbox DVR</span><span class="tech-badge">Feedback Hub</span>
+                    <span class="tech-badge">Maps Hub</span><span class="tech-badge">Edge Background</span>
+                </div>
+            </div>
+            <div class="card-bento p-8 rounded-3xl">
+                <h4 class="text-blue-400 font-bold mb-6 text-[11px] uppercase tracking-widest flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span> Registry & Latency
+                </h4>
+                <div class="flex flex-wrap gap-2">
+                    <span class="tech-badge">DPC Fix</span><span class="tech-badge">I/O Priority</span>
+                    <span class="tech-badge">FSE Enable</span><span class="tech-badge">Power Throttling</span>
+                    <span class="tech-badge">GameMode Fix</span><span class="tech-badge">HAGS Opt.</span>
+                </div>
+            </div>
+            <div class="card-bento p-8 rounded-3xl">
+                <h4 class="text-blue-400 font-bold mb-6 text-[11px] uppercase tracking-widest flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span> Net & Memory
+                </h4>
+                <div class="flex flex-wrap gap-2">
+                    <span class="tech-badge">TCP Nagle</span><span class="tech-badge">DNS Flush</span>
+                    <span class="tech-badge">RAM Purge</span><span class="tech-badge">Standby List</span>
+                    <span class="tech-badge">MTU Opt.</span><span class="tech-badge">Network Jitter</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="max-w-7xl mx-auto px-6 py-20">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-extrabold italic font-gaming" data-t="gal_title">Interface Overview</h2>
+            <p class="text-slate-500 mt-2 italic text-sm uppercase tracking-widest" data-t="gal_sub">Clean. Efficient. Minimalist.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div class="card-bento p-4 rounded-[2.5rem]">
+                <div class="img-container">
+                    <div class="absolute top-4 left-4 z-10 bg-slate-900/80 px-3 py-1 rounded text-[10px] font-bold font-mono border border-slate-700 italic">MAIN_MENU.EXE</div>
+                    <img src="https://raw.githubusercontent.com/staark-dev/FPS-Optimizer-Windowsv3/master/docs/assets/Captur%C4%83%20de%20ecran%202024-09-02%20194451.png" class="w-full img-preview">
+                </div>
+            </div>
+            <div class="card-bento p-4 rounded-[2.5rem]">
+                <div class="img-container">
+                    <div class="absolute top-4 left-4 z-10 bg-slate-900/80 px-3 py-1 rounded text-[10px] font-bold font-mono border border-slate-700 italic">ENGINE_LOG.SYS</div>
+                    <img src="https://raw.githubusercontent.com/staark-dev/FPS-Optimizer-Windowsv3/master/docs/assets/Captur%C4%83%20de%20ecran%202024-09-02%20194511.png" class="w-full img-preview">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="benchmarks" class="max-w-5xl mx-auto px-8 py-24">
+        <div class="text-center mb-20">
+            <h2 class="text-4xl font-extrabold italic font-gaming" data-t="bench_title">Real Performance Uplift</h2>
+            <p class="text-slate-500 mt-4 italic text-sm uppercase tracking-widest" data-t="bench_sub">Average FPS Gain in Performance Mode</p>
+        </div>
+        <div class="space-y-12">
+            <div class="group">
+                <div class="flex justify-between font-gaming text-lg mb-3 italic">
+                    <span class="text-slate-300">Fortnite</span>
+                    <span class="text-emerald-400 font-bold">+6% — 15% AVG FPS</span>
+                </div>
+                <div class="h-3 w-full bg-slate-900/50 rounded-full overflow-hidden border border-slate-800">
+                    <div class="h-full bg-emerald-500 w-[85%] shadow-[0_0_20px_rgba(16,185,129,0.3)]"></div>
+                </div>
+            </div>
+            <div class="group">
+                <div class="flex justify-between font-gaming text-lg mb-3 italic">
+                    <span class="text-slate-300">Valorant</span>
+                    <span class="text-cyan-400 font-bold">+5% — 12% AVG FPS</span>
+                </div>
+                <div class="h-3 w-full bg-slate-900/50 rounded-full overflow-hidden border border-slate-800">
+                    <div class="h-full bg-cyan-500 w-[70%] shadow-[0_0_20px_rgba(6,182,212,0.3)]"></div>
+                </div>
+            </div>
+            <div class="group">
+                <div class="flex justify-between font-gaming text-lg mb-3 italic">
+                    <span class="text-slate-300">Counter-Strike 2</span>
+                    <span class="text-blue-400 font-bold">+3% — 8% AVG FPS</span>
+                </div>
+                <div class="h-3 w-full bg-slate-900/50 rounded-full overflow-hidden border border-slate-800">
+                    <div class="h-full bg-blue-500 w-[55%] shadow-[0_0_20px_rgba(59,130,246,0.3)]"></div>
+                </div>
+            </div>
+        </div>
+        <p class="text-center text-[10px] text-slate-600 mt-16 uppercase tracking-[0.4em] font-bold italic leading-relaxed" data-t="bench_note">
+            * Results depend on hardware bottlenecks (CPU vs GPU). Minimum stability increase recorded: 2-3%.
+        </p>
+    </section>
+
+    <section id="faq" class="max-w-6xl mx-auto px-6 py-20 border-t border-slate-900">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-4xl font-extrabold italic font-gaming mb-8" data-t="faq_title">Safety & Operations FAQ</h2>
+                <div class="space-y-6">
+                    <div class="card-bento p-8 rounded-3xl">
+                        <h4 class="text-white font-bold mb-3 italic" data-t="q1_t">Is it safe for Anti-Cheat?</h4>
+                        <p class="text-slate-500 text-sm leading-relaxed italic" data-t="q1_d">Absolutely. We do not modify game files, inject DLLs, or interfere with game memory. We only optimize native Windows services and registry settings. Fully compliant with Vanguard, EAC, and BattlEye.</p>
+                    </div>
+                    <div class="card-bento p-8 rounded-3xl border-emerald-500/20 bg-emerald-500/5">
+                        <h4 class="text-emerald-400 font-bold mb-3 italic" data-t="q2_t">What if I want to revert?</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed italic" data-t="q2_d">The application automatically creates a <strong>Restore Point</strong> on launch. Simply open 'System Restore' in Windows to return to your exact previous configuration.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-bento p-12 rounded-[3.5rem] bg-blue-600/5 border-blue-500/30">
+                <h3 class="text-2xl font-bold font-gaming text-blue-400 mb-8 italic uppercase tracking-widest">Installation Checklist</h3>
+                <ul class="space-y-6">
+                    <li class="flex gap-4 items-start">
+                        <span class="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0">1</span>
+                        <p class="text-slate-300 text-sm italic" data-t="s1">Download <strong>Optimizer.exe</strong> from the master repository.</p>
+                    </li>
+                    <li class="flex gap-4 items-start">
+                        <span class="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0">2</span>
+                        <p class="text-slate-300 text-sm italic" data-t="s2">Right-click and <strong>Run as Administrator</strong> to allow registry access.</p>
+                    </li>
+                    <li class="flex gap-4 items-start">
+                        <span class="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0">3</span>
+                        <p class="text-slate-300 text-sm italic" data-t="s3">The app creates an <strong>Auto-Restore Point</strong>. Follow the on-screen menu.</p>
+                    </li>
+                    <li class="flex gap-4 items-start">
+                        <span class="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0">4</span>
+                        <p class="text-slate-300 text-sm italic" data-t="s4">Restart your computer to apply the low-level kernel and service changes.</p>
+                    </li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <section id="detalii" class="max-w-7xl mx-auto px-6 py-24 border-t border-slate-900">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-extrabold tracking-tight mb-4">Ce face sub capotă?</h2>
-            <p class="text-lg text-slate-400">Peste 100 de optimizări specifice, organizate în 4 piloni.</p>
+    <footer class="py-24 text-center px-6 border-t border-slate-900">
+        <div class="max-w-4xl mx-auto bg-amber-600/5 border border-amber-600/20 p-10 rounded-[2.5rem] mb-20 border-l-8 border-l-amber-600">
+            <h3 class="text-amber-500 text-xl font-bold font-gaming mb-4 flex items-center justify-center gap-3 italic italic">⚠️ Legal Notice</h3>
+            <p class="text-slate-400 text-sm leading-relaxed italic" data-t="disc">
+                Staark-Dev is not responsible for any system damage. Optimization carries inherent risks to system stability. Always verify the source code.
+            </p>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            <div class="md:col-span-2 bg-slate-900 border border-slate-800 p-8 rounded-3xl hover:border-blue-500/50 transition duration-300 flex flex-col justify-between">
-                <div>
-                    <div class="text-4xl mb-5">🗑️</div>
-                    <h3 class="text-2xl font-bold mb-4 font-gaming text-blue-400">Windows Debloat Inteligent</h3>
-                    <p class="text-slate-400 leading-relaxed mb-6">Elimină telemetria, Cortana, aplicațiile OneDrive preinstalate și dezactivează serviciile de fundal inutile care consumă procesor și RAM în timp ce te joci.</p>
-                </div>
-                <div class="flex flex-wrap gap-2 text-xs font-mono text-blue-300">
-                    <span class="bg-blue-950/50 px-2 py-1 rounded">- Disable Telemetry</span>
-                    <span class="bg-blue-950/50 px-2 py-1 rounded">- Remove Cortana</span>
-                    <span class="bg-blue-950/50 px-2 py-1 rounded">- Fix GameDVR</span>
-                </div>
-            </div>
-
-            <div class="bg-gradient-to-br from-slate-900 to-blue-950/30 border border-slate-800 p-8 rounded-3xl group hover:border-blue-500 transition duration-300">
-                <div class="text-4xl mb-5">⚙️</div>
-                <h3 class="text-2xl font-bold mb-4 font-gaming">Registry Tweaks</h3>
-                <p class="text-slate-400 text-sm leading-relaxed">Optimizează peste 50 de chei de regiștri pentru a reduce latența mouse-ului/tastaturii (input lag) și a îmbunătăți prioritatea proceselor de joc.</p>
-            </div>
-
-            <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl hover:border-blue-500/50 transition duration-300">
-                <div class="text-4xl mb-5">🧹</div>
-                <h3 class="text-2xl font-bold mb-4 font-gaming text-cyan-400">RAM Cleaner Integrat</h3>
-                <p class="text-slate-400 text-sm leading-relaxed">Golește cache-ul sistemului și forțează eliberarea memoriei RAM neutilizate înainte de lansarea jocului, prevenind "agățările" cauzate de lipsa de memorie.</p>
-            </div>
-
-            <div class="md:col-span-2 bg-slate-900 border border-slate-800 p-8 rounded-3xl flex flex-col md:flex-row items-center gap-6">
-                <div class="text-4xl">🛡️</div>
-                <div class="flex-1 text-center md:text-left">
-                    <h3 class="text-xl font-bold mb-2">Compatibilitate Extinsă</h3>
-                    <p class="text-slate-400 text-sm mb-4">Verificat și optimizat pentru funcționare sigură pe:</p>
-                    <div class="flex flex-wrap gap-2 justify-center md:justify-start">
-                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs border border-slate-700 font-medium">Windows 10 (Toate versiunile)</span>
-                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs border border-slate-700 font-medium">Windows 11 (22H2/23H2)</span>
-                        <span class="px-3 py-1 bg-slate-800 rounded-full text-xs border border-slate-700 font-medium text-blue-400">Sisteme x64</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="benchmarks" class="max-w-5xl mx-auto px-8 py-24 border-t border-slate-900">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl font-bold mb-4 text-blue-500 font-gaming">Performanță Reală</h2>
-            <p class="text-3xl font-extrabold tracking-tight">Rezultate obținute în teste</p>
-        </div>
-
-        <div class="grid gap-8">
-            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 transform hover:border-green-500/30 transition duration-300 hover:shadow-lg">
-                <div class="flex justify-between mb-4 items-end">
-                    <span class="text-2xl font-bold font-gaming">Valorant (Low Settings)</span>
-                    <span class="text-green-400 font-bold font-gaming">+28% Performanță</span>
-                </div>
-                <div class="space-y-4">
-                    <div>
-                        <div class="flex justify-between text-xs text-slate-500 mb-1"><span>Default Windows</span> <span>144 FPS</span></div>
-                        <div class="w-full bg-slate-800 h-3.5 rounded-full overflow-hidden">
-                            <div class="bg-slate-600 h-full rounded-full" style="width: 70%"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs text-blue-400 mb-1"><span>Optimizat cu v3</span> <span class="font-bold">185 FPS</span></div>
-                        <div class="w-full bg-slate-800 h-3.5 rounded-full overflow-hidden">
-                            <div class="bg-blue-500 h-full glow-effect rounded-full animate-pulse" style="width: 92%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 transform hover:border-green-500/30 transition duration-300 hover:shadow-lg">
-                <div class="flex justify-between mb-4 items-end">
-                    <span class="text-2xl font-bold font-gaming">Counter-Strike 2</span>
-                    <span class="text-green-400 font-bold font-gaming">+35% Performanță</span>
-                </div>
-                <div class="space-y-4">
-                    <div>
-                        <div class="flex justify-between text-xs text-slate-500 mb-1"><span>Default Windows</span> <span>120 FPS</span></div>
-                        <div class="w-full bg-slate-800 h-3.5 rounded-full overflow-hidden">
-                            <div class="bg-slate-600 h-full rounded-full" style="width: 62%"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs text-blue-400 mb-1"><span>Optimizat cu v3</span> <span class="font-bold">162 FPS</span></div>
-                        <div class="w-full bg-slate-800 h-3.5 rounded-full overflow-hidden">
-                            <div class="bg-blue-500 h-full glow-effect rounded-full animate-pulse" style="width: 88%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="disclaimer" class="max-w-4xl mx-auto px-6 py-24 border-t border-slate-900">
-        <div class="relative group">
-            <div class="absolute -inset-1 bg-gradient-to-r from-amber-500/20 to-orange-500/20 rounded-3xl blur opacity-25 transition duration-1000 group-hover:opacity-40"></div>
-            <div class="relative bg-slate-900 border border-amber-500/20 p-8 rounded-3xl flex flex-col md:flex-row gap-6 items-center">
-                <div class="text-amber-500 bg-amber-500/10 p-5 rounded-2xl text-3xl">⚠️</div>
-                <div>
-                    <h3 class="text-2xl font-bold text-amber-500 mb-3 font-gaming">Atenție & Siguranță</h3>
-                    <div class="space-y-4 text-slate-400 text-sm leading-relaxed">
-                        <p>
-                            FPS Optimizer v3 modifică regiștrii și serviciile de sistem. Deși este bazat pe scripturi transparente (open-source) și verificat, <strong>utilizarea lui se face pe propria răspundere</strong>.
-                        </p>
-                        <p>
-                            Dezvoltatorul nu își asumă responsabilitatea pentru eventuale pierderi de date sau instabilități software. Proiectul este oferit "as is".
-                        </p>
-                        <div class="bg-amber-950/20 p-4 rounded-xl border-l-4 border-amber-500 italic text-amber-300">
-                            Recomandare: Creați un <strong>System Restore Point</strong> înainte de a rula optimizarea pentru o revenire sigură.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="py-12 text-center text-slate-600 border-t border-slate-900 text-sm">
-        <p class="font-gaming">⚡ FPS Optimizer v3 | Un proiect Staark-Dev</p>
-        <p class="mt-2 text-xs">© 2024 - Prezent. Open Source sub licență MIT.</p>
-        <div class="mt-4 flex justify-center gap-4 text-slate-500">
-            <a href="https://github.com/staark-dev" class="hover:text-white transition">GitHub Profile</a>
-            <a href="https://github.com/staark-dev/FPS-Optimizer-Windowsv3/issues" class="hover:text-white transition">Report Issue</a>
+        <div class="text-slate-700 font-gaming text-[10px] tracking-[0.6em] uppercase font-bold">
+            &copy; 2026 // Staark-Dev // Engineered for Performance
         </div>
     </footer>
 
     <script>
-        fetch('https://api.github.com/repos/staark-dev/FPS-Optimizer-Windowsv3')
-            .then(response => response.json())
-            .then(data => {
-                if(data.stargazers_count !== undefined) {
-                    document.getElementById('star-count').innerText = '⭐ ' + data.stargazers_count + ' GitHub Stars';
-                }
-            })
-            .catch(() => {
-                document.getElementById('star-count').style.display = 'none';
+        const translations = {
+            en: {
+                nav_about: "Philosophy", nav_tech: "Technical Core", nav_gal: "Interface", nav_bench: "Benchmarks", nav_faq: "FAQ & Safety",
+                hero_desc: "An advanced open-source optimization engine designed to strip away Windows bloat, recalibrate system latency, and lock in competitive stability.",
+                hero_trust: "100% Auditable Code. 0% Malicious. 100% Free.",
+                bento_t1: "Total Transparency", bento_d1: "Every registry modification and service suspension is publicly auditable on GitHub. We don't hide code because we have nothing to hide.",
+                bento_t2: "Failsafe Protection", bento_d2: "The application automatically triggers a Windows Restore Point before any operation for a 100% safe revert.",
+                tech_title: "The Optimization Core", tech_sub: "Deep dive into our engineering",
+                gal_title: "Interface Overview", gal_sub: "Clean. Efficient. Minimalist.",
+                bench_title: "Real Performance Uplift", bench_sub: "Average FPS Gain in Performance Mode",
+                bench_note: "* Results depend on hardware bottlenecks (CPU vs GPU). Minimum stability increase recorded: 2-3%.",
+                faq_title: "Safety & Operations FAQ",
+                q1_t: "Is it safe for Anti-Cheat?", q1_d: "Absolutely. We do not modify game files. We only optimize native Windows settings compliant with Vanguard, EAC, and BattlEye.",
+                q2_t: "What if I want to revert?", q2_d: "The application automatically creates a Restore Point on launch. Use 'System Restore' to revert instantly.",
+                s1: "Download Optimizer.exe from the master repository.", s2: "Right-click and Run as Administrator to allow registry access.", s3: "The app creates an Auto-Restore Point. Follow the on-screen menu.", s4: "Restart your computer to apply the low-level changes.",
+                disc: "Staark-Dev is not responsible for any system damage. Optimization carries inherent risks. Always verify the source code.",
+                lang_btn: "RO"
+            },
+            ro: {
+                nav_about: "Filozofie", nav_tech: "Detalii Tehnice", nav_gal: "Interfață", nav_bench: "Performanță", nav_faq: "Siguranță",
+                hero_desc: "Un motor de optimizare open-source creat pentru a elimina procesele inutile din Windows, a recalibra latența și a asigura stabilitatea.",
+                hero_trust: "Cod Auditabil. 0% Malware. 100% Gratuit.",
+                bento_t1: "Transparență Totală", bento_d1: "Orice modificare de regiștri sau servicii este vizibilă pe GitHub. Nu ascundem codul pentru că nu avem nimic de ascuns.",
+                bento_t2: "Protecție Garantată", bento_d2: "Aplicația declanșează automat un Punct de Restaurare (Restore Point) pentru o revenire 100% sigură.",
+                tech_title: "Nucleul de Optimizare", tech_sub: "O privire detaliată sub capotă",
+                gal_title: "Previzualizare Interfață", gal_sub: "Curată. Eficientă. Minimalistă.",
+                bench_title: "Performanță Verificată", bench_sub: "Creșterea medie a FPS-urilor",
+                bench_note: "* Rezultatele variază în funcție de hardware. Îmbunătățirea minimă a stabilității: 2-3%.",
+                faq_title: "Întrebări Frecvente",
+                q1_t: "Este sigur pentru Anti-Cheat?", q1_d: "Absolut. Nu modificăm fișierele jocurilor. Optimizăm doar setările Windows compatibile cu Vanguard, EAC și BattlEye.",
+                q2_t: "Cum pot reveni la setările vechi?", q2_d: "Aplicația creează automat un Restore Point. Folosește 'System Restore' din Windows pentru revenire.",
+                s1: "Descarcă Optimizer.exe din repository-ul principal.", s2: "Click dreapta și Run as Administrator pentru acces la regiștri.", s3: "Aplicația creează un Restore Point automat. Urmează meniul.", s4: "Repornește PC-ul pentru a aplica modificările la nivel de kernel.",
+                disc: "Staark-Dev nu este responsabil pentru daune. Optimizarea sistemului implică riscuri. Verificați întotdeauna codul sursă.",
+                lang_btn: "EN"
+            }
+        };
+
+        let currentLang = 'en';
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ro' : 'en';
+            document.getElementById('lang-label').innerText = currentLang === 'en' ? 'RO' : 'EN';
+            document.querySelectorAll('[data-t]').forEach(el => {
+                const key = el.getAttribute('data-t');
+                el.innerText = translations[currentLang][key];
             });
+        }
+
+        fetch('https://api.github.com/repos/staark-dev/FPS-Optimizer-Windowsv3')
+            .then(res => res.json()).then(data => {
+                if(data.stargazers_count) document.getElementById('star-count').innerText = `⭐ GitHub Stars: ${data.stargazers_count}`;
+            }).catch(() => { document.getElementById('star-count').innerText = `⭐ Open Source Project`; });
     </script>
 </body>
 </html>
