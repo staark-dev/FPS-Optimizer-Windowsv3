@@ -1,0 +1,85 @@
+<Page x:Class="FPSOptimizer.UI.Pages.PageProfiles"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="{StaticResource BgBrush}">
+    <Grid Margin="36,24,36,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,24">
+            <TextBlock x:Name="TxtTitle" Text="Profil de Optimizare" FontSize="22" FontWeight="Bold"
+                       Foreground="{StaticResource WhiteBrush}"/>
+            <TextBlock x:Name="TxtDesc"
+                       Text="Alege un profil care se potriveste nevoilor tale. Poti ajusta individual in pasul urmator."
+                       FontSize="12" Foreground="{StaticResource LGrayBrush}" Margin="0,4,0,0"/>
+        </StackPanel>
+
+        <!-- Profile Cards -->
+        <UniformGrid Grid.Row="1" Columns="3" VerticalAlignment="Top">
+
+            <!-- SAFE -->
+            <Border x:Name="CardSafe" Margin="0,0,12,0" CornerRadius="10" Cursor="Hand"
+                    BorderThickness="2" BorderBrush="#232850" Background="#0D0F1E"
+                    MouseLeftButtonUp="CardSafe_Click">
+                <StackPanel Margin="20,24,20,24">
+                    <TextBlock Text="🛡️" FontSize="42" HorizontalAlignment="Center" Margin="0,0,0,12"/>
+                    <TextBlock x:Name="TxtSafeTitle" Text="Safe" FontSize="18" FontWeight="Bold"
+                               Foreground="{StaticResource GreenBrush}" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+                    <TextBlock x:Name="TxtSafeSubtitle" Text="Minim — fara riscuri"
+                               FontSize="11" Foreground="{StaticResource LGrayBrush}"
+                               HorizontalAlignment="Center" Margin="0,0,0,16" TextWrapping="Wrap" TextAlignment="Center"/>
+                    <StackPanel x:Name="PanelSafeModules" Margin="0,0,0,16"/>
+                    <Border x:Name="BadgeSafe" Background="#0A200A" BorderBrush="#1A6B1A"
+                            BorderThickness="1" CornerRadius="4" Padding="0,6" HorizontalAlignment="Stretch">
+                        <TextBlock x:Name="TxtSafeBadge" Text="4 module" FontSize="11" FontWeight="Bold"
+                                   Foreground="{StaticResource GreenBrush}" HorizontalAlignment="Center"/>
+                    </Border>
+                </StackPanel>
+            </Border>
+
+            <!-- BALANCED -->
+            <Border x:Name="CardBalanced" Margin="6,0,6,0" CornerRadius="10" Cursor="Hand"
+                    BorderThickness="2" BorderBrush="#1E3A6E" Background="#080F1E"
+                    MouseLeftButtonUp="CardBalanced_Click">
+                <StackPanel Margin="20,24,20,24">
+                    <TextBlock Text="⚖️" FontSize="42" HorizontalAlignment="Center" Margin="0,0,0,12"/>
+                    <TextBlock x:Name="TxtBalancedTitle" Text="Balanced" FontSize="18" FontWeight="Bold"
+                               Foreground="{StaticResource AccentBrush}" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+                    <TextBlock x:Name="TxtBalancedSubtitle" Text="Recomandat pentru majoritatea"
+                               FontSize="11" Foreground="{StaticResource LGrayBrush}"
+                               HorizontalAlignment="Center" Margin="0,0,0,16" TextWrapping="Wrap" TextAlignment="Center"/>
+                    <StackPanel x:Name="PanelBalancedModules" Margin="0,0,0,16"/>
+                    <Border x:Name="BadgeBalanced" Background="#0A1020" BorderBrush="#1E3A6E"
+                            BorderThickness="1" CornerRadius="4" Padding="0,6" HorizontalAlignment="Stretch">
+                        <TextBlock x:Name="TxtBalancedBadge" Text="8 module" FontSize="11" FontWeight="Bold"
+                                   Foreground="{StaticResource AccentBrush}" HorizontalAlignment="Center"/>
+                    </Border>
+                </StackPanel>
+            </Border>
+
+            <!-- GAMING HARDCORE -->
+            <Border x:Name="CardGaming" Margin="12,0,0,0" CornerRadius="10" Cursor="Hand"
+                    BorderThickness="2" BorderBrush="#4A1A00" Background="#120A00"
+                    MouseLeftButtonUp="CardGaming_Click">
+                <StackPanel Margin="20,24,20,24">
+                    <TextBlock Text="🔥" FontSize="42" HorizontalAlignment="Center" Margin="0,0,0,12"/>
+                    <TextBlock x:Name="TxtGamingTitle" Text="Gaming Hardcore" FontSize="18" FontWeight="Bold"
+                               Foreground="{StaticResource OrangeBrush}" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+                    <TextBlock x:Name="TxtGamingSubtitle" Text="Maxim FPS — toate optimizarile"
+                               FontSize="11" Foreground="{StaticResource LGrayBrush}"
+                               HorizontalAlignment="Center" Margin="0,0,0,16" TextWrapping="Wrap" TextAlignment="Center"/>
+                    <StackPanel x:Name="PanelGamingModules" Margin="0,0,0,16"/>
+                    <Border x:Name="BadgeGaming" Background="#200A00" BorderBrush="#6E3A00"
+                            BorderThickness="1" CornerRadius="4" Padding="0,6" HorizontalAlignment="Stretch">
+                        <TextBlock x:Name="TxtGamingBadge" Text="13 module" FontSize="11" FontWeight="Bold"
+                                   Foreground="{StaticResource OrangeBrush}" HorizontalAlignment="Center"/>
+                    </Border>
+                </StackPanel>
+            </Border>
+
+        </UniformGrid>
+    </Grid>
+</Page>

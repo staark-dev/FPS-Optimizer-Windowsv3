@@ -1,0 +1,100 @@
+<Page x:Class="FPSOptimizer.UI.Pages.PageScan"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="{StaticResource BgBrush}" Title="Scanare">
+    <Grid Margin="36,24,36,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock x:Name="TxtScanTitle" Text="Scanare Sistem" FontSize="22" FontWeight="Bold"
+                       Foreground="{StaticResource WhiteBrush}"/>
+            <TextBlock x:Name="TxtScanDesc" Text="Analiza hardware si sfaturi personalizate pentru placa ta video."
+                       FontSize="12" Foreground="{StaticResource LGrayBrush}" Margin="0,4,0,0"/>
+        </StackPanel>
+
+        <!-- Info Cards Grid -->
+        <UniformGrid Grid.Row="1" Rows="2" Columns="3" Margin="0,0,0,20">
+            <Border Style="{StaticResource Card}" Margin="0,0,8,8">
+                <StackPanel>
+                    <TextBlock x:Name="LblCpuHeader" Text="🔲  PROCESOR" Style="{StaticResource SectionLabel}"/>
+                    <TextBlock x:Name="LblCpu" Text="Se scaneaza..." FontSize="12"
+                               Foreground="{StaticResource WhiteBrush}" TextWrapping="Wrap"/>
+                    <TextBlock x:Name="LblCpuSub" Text="" FontSize="10"
+                               Foreground="{StaticResource LGrayBrush}" Margin="0,2,0,0"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}" Margin="4,0,4,8">
+                <StackPanel>
+                    <TextBlock x:Name="LblRamHeader" Text="💾  MEMORIE RAM" Style="{StaticResource SectionLabel}"/>
+                    <TextBlock x:Name="LblRam" Text="Se scaneaza..." FontSize="12"
+                               Foreground="{StaticResource WhiteBrush}"/>
+                    <TextBlock x:Name="LblRamSub" Text="" FontSize="10"
+                               Foreground="{StaticResource LGrayBrush}" Margin="0,2,0,0"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}" Margin="8,0,0,8">
+                <StackPanel>
+                    <TextBlock x:Name="LblGpuHeader" Text="🎮  PLACA VIDEO" Style="{StaticResource SectionLabel}"/>
+                    <TextBlock x:Name="LblGpu" Text="Se scaneaza..." FontSize="12"
+                               Foreground="{StaticResource WhiteBrush}" TextWrapping="Wrap"/>
+                    <TextBlock x:Name="LblGpuSub" Text="" FontSize="10"
+                               Foreground="{StaticResource LGrayBrush}" Margin="0,2,0,0"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}" Margin="0,0,8,0">
+                <StackPanel>
+                    <TextBlock x:Name="LblOsHeader" Text="🪟  SISTEM OPERARE" Style="{StaticResource SectionLabel}"/>
+                    <TextBlock x:Name="LblOs" Text="Se scaneaza..." FontSize="12"
+                               Foreground="{StaticResource WhiteBrush}" TextWrapping="Wrap"/>
+                    <TextBlock x:Name="LblOsSub" Text="" FontSize="10"
+                               Foreground="{StaticResource LGrayBrush}" Margin="0,2,0,0"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}" Margin="4,0,4,0">
+                <StackPanel>
+                    <TextBlock x:Name="LblDiskHeader" Text="💿  STOCARE C:" Style="{StaticResource SectionLabel}"/>
+                    <TextBlock x:Name="LblDisk" Text="Se scaneaza..." FontSize="12"
+                               Foreground="{StaticResource WhiteBrush}"/>
+                    <TextBlock x:Name="LblDiskSub" Text="" FontSize="10"
+                               Foreground="{StaticResource LGrayBrush}" Margin="0,2,0,0"/>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}" Margin="8,0,0,0">
+                <StackPanel>
+                    <TextBlock x:Name="LblPowerHeader" Text="⚡  PLAN ENERGIE" Style="{StaticResource SectionLabel}"/>
+                    <TextBlock x:Name="LblPower" Text="Se scaneaza..." FontSize="12"
+                               Foreground="{StaticResource YellowBrush}" TextWrapping="Wrap"/>
+                    <TextBlock x:Name="LblPowerSub" Text="Optimizer va seta Ultimate Performance"
+                               FontSize="10" Foreground="{StaticResource GrayBrush}" Margin="0,2,0,0"/>
+                </StackPanel>
+            </Border>
+        </UniformGrid>
+
+        <!-- GPU Tips -->
+        <Border Grid.Row="2" Style="{StaticResource Card}" Padding="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Background="#0D1428" CornerRadius="8,8,0,0" Padding="16,10">
+                    <TextBlock x:Name="TxtTipsHeader"
+                               Text="💡  SFATURI PERSONALIZATE PENTRU PLACA TA VIDEO"
+                               Style="{StaticResource SectionLabel}" Margin="0"/>
+                </Border>
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <TextBlock x:Name="GpuTipsText"
+                               Text="Scanarea se incarca automat..."
+                               FontFamily="Consolas" FontSize="11.5"
+                               Foreground="{StaticResource WhiteBrush}"
+                               Padding="16,12" TextWrapping="Wrap" LineHeight="20"/>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+
+    </Grid>
+</Page>

@@ -1,0 +1,89 @@
+<!-- PAGE WELCOME -->
+<Page x:Class="FPSOptimizer.UI.Pages.PageWelcome"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="{StaticResource BgBrush}" Title="Bun venit">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="36,32,36,24">
+
+            <!-- Hero -->
+            <TextBlock x:Name="TxtWelcomeTo" Text="Bun venit la" FontSize="15" Foreground="{StaticResource LGrayBrush}" Margin="0,0,0,4"/>
+            <TextBlock x:Name="TxtAppName" Text="Windows FPS Optimizer Pro" FontSize="30" FontWeight="Bold"
+                       Foreground="{StaticResource WhiteBrush}"/>
+            <TextBlock x:Name="TxtSubtitle" Text="Optimizare completa in 6 pasi simpli — sigura, cu backup si Restore Point Windows."
+                       FontSize="13" Foreground="{StaticResource LGrayBrush}" Margin="0,6,0,28"/>
+
+            <!-- Feature grid -->
+            <UniformGrid Rows="2" Columns="3" Margin="0,0,0,28">
+                <Border Style="{StaticResource Card}" Margin="0,0,10,10">
+                    <StackPanel>
+                        <TextBlock Text="🛡️" FontSize="26" Margin="0,0,0,6"/>
+                        <TextBlock x:Name="TxtFeat1Title" Text="100% Sigur" FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{StaticResource AccentBrush}" Margin="0,0,0,4"/>
+                        <TextBlock x:Name="TxtFeat1Desc" Text="Restore Point Windows + backup registri inainte de orice modificare."
+                                   FontSize="11" Foreground="{StaticResource LGrayBrush}" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}" Margin="5,0,5,10">
+                    <StackPanel>
+                        <TextBlock Text="🔐" FontSize="26" Margin="0,0,0,6"/>
+                        <TextBlock x:Name="TxtFeat2Title" Text="Permisiuni Clare" FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{StaticResource AccentBrush}" Margin="0,0,0,4"/>
+                        <TextBlock x:Name="TxtFeat2Desc" Text="Fiecare optiune are indicator de risc si descriere tehnica detaliata."
+                                   FontSize="11" Foreground="{StaticResource LGrayBrush}" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}" Margin="10,0,0,10">
+                    <StackPanel>
+                        <TextBlock Text="🎮" FontSize="26" Margin="0,0,0,6"/>
+                        <TextBlock x:Name="TxtFeat3Title" Text="FPS Maxim" FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{StaticResource AccentBrush}" Margin="0,0,0,4"/>
+                        <TextBlock x:Name="TxtFeat3Desc" Text="GPU Priority 8, Core Parking off, Nagle off, tweaks FPS verificate."
+                                   FontSize="11" Foreground="{StaticResource LGrayBrush}" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}" Margin="0,0,10,0">
+                    <StackPanel>
+                        <TextBlock Text="📋" FontSize="26" Margin="0,0,0,6"/>
+                        <TextBlock x:Name="TxtFeat4Title" Text="Wizard Pas cu Pas" FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{StaticResource AccentBrush}" Margin="0,0,0,4"/>
+                        <TextBlock x:Name="TxtFeat4Desc" Text="6 pasi cu explicatii clare. Tu decizi exact ce se aplica."
+                                   FontSize="11" Foreground="{StaticResource LGrayBrush}" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}" Margin="5,0,5,0">
+                    <StackPanel>
+                        <TextBlock Text="🧹" FontSize="26" Margin="0,0,0,6"/>
+                        <TextBlock x:Name="TxtFeat5Title" Text="Fara Bloatware" FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{StaticResource AccentBrush}" Margin="0,0,0,4"/>
+                        <TextBlock x:Name="TxtFeat5Desc" Text="40+ aplicatii inutile si 25+ servicii de fundal eliminate."
+                                   FontSize="11" Foreground="{StaticResource LGrayBrush}" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}" Margin="10,0,0,0">
+                    <StackPanel>
+                        <TextBlock Text="🔄" FontSize="26" Margin="0,0,0,6"/>
+                        <TextBlock x:Name="TxtFeat6Title" Text="Restaurare Usoara" FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{StaticResource AccentBrush}" Margin="0,0,0,4"/>
+                        <TextBlock x:Name="TxtFeat6Desc" Text="Script RESTAURARE.ps1 generat automat pe Desktop."
+                                   FontSize="11" Foreground="{StaticResource LGrayBrush}" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+            </UniformGrid>
+
+            <!-- Warning box -->
+            <Border Background="#3C2800" BorderBrush="#6E4800" BorderThickness="1" CornerRadius="8" Padding="16,12">
+                <StackPanel>
+                    <TextBlock x:Name="TxtWarnTitle" Text="⚠️  Citeste inainte de a continua" FontSize="13" FontWeight="Bold"
+                               Foreground="{StaticResource YellowBrush}" Margin="0,0,0,8"/>
+                    <TextBlock x:Name="TxtWarn1" Foreground="{StaticResource WhiteBrush}" FontSize="12" TextWrapping="Wrap" Margin="0,1,0,1"/>
+                    <TextBlock x:Name="TxtWarn2" Foreground="{StaticResource WhiteBrush}" FontSize="12" TextWrapping="Wrap" Margin="0,1,0,1"/>
+                    <TextBlock x:Name="TxtWarn3" Foreground="{StaticResource WhiteBrush}" FontSize="12" TextWrapping="Wrap" Margin="0,1,0,1"/>
+                    <TextBlock x:Name="TxtWarn4" Foreground="{StaticResource WhiteBrush}" FontSize="12" TextWrapping="Wrap" Margin="0,1,0,1"/>
+                    <TextBlock x:Name="TxtWarn5" Foreground="{StaticResource WhiteBrush}" FontSize="12" TextWrapping="Wrap" Margin="0,1,0,1"/>
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

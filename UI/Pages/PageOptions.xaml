@@ -1,0 +1,90 @@
+<Page x:Class="FPSOptimizer.UI.Pages.PageOptions"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="{StaticResource BgBrush}" Title="Configurare">
+    <Grid Margin="36,24,36,8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,12">
+            <TextBlock x:Name="TxtTitle" Text="Configurare Optimizare" FontSize="22" FontWeight="Bold"
+                       Foreground="{StaticResource WhiteBrush}"/>
+            <TextBlock x:Name="TxtDesc" Text="Selecteaza ce sa fie optimizat. Fiecare modul are indicator de risc si descriere tehnica."
+                       FontSize="12" Foreground="{StaticResource LGrayBrush}" Margin="0,4,0,0"/>
+        </StackPanel>
+
+        <!-- Select all / none -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,12">
+            <Button x:Name="BtnSelectAll" Content="✓  Selecteaza Toate" Style="{StaticResource GhostButton}"
+                    Padding="12,6" FontSize="11" Click="SelectAll_Click" Margin="0,0,8,0"/>
+            <Button x:Name="BtnSelectNone" Content="✗  Deselecteaza Toate" Style="{StaticResource GhostButton}"
+                    Padding="12,6" FontSize="11" Click="SelectNone_Click"/>
+            <TextBlock x:Name="CountLabel" VerticalAlignment="Center" Margin="16,0,0,0"
+                       FontSize="11" Foreground="{StaticResource GrayBrush}"/>
+        </StackPanel>
+
+        <!-- Module list -->
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="ModuleList">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <!-- Category header -->
+                            <Border x:Name="CatHeader" Background="#0D1020"
+                                    Padding="10,6" Margin="0,8,0,4"
+                                    Visibility="{Binding CategoryHeaderVisibility}">
+                                <TextBlock FontSize="10" FontWeight="Bold"
+                                           Foreground="{StaticResource AccentBrush}"
+                                           Text="{Binding Category, Converter={StaticResource CharSpacing}, ConverterParameter=150}"/>
+                            </Border>
+
+                            <!-- Module card -->
+                            <Border Style="{StaticResource Card}" Margin="0,0,0,6" Padding="14,12">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <CheckBox Grid.Column="0" Style="{StaticResource ModernCheckBox}"
+                                              IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                              VerticalAlignment="Top" Margin="0,2,12,0"/>
+
+                                    <TextBlock Grid.Column="1" Text="{Binding Icon}" FontSize="22"
+                                               VerticalAlignment="Top" Margin="0,0,12,0"/>
+
+                                    <StackPanel Grid.Column="2" VerticalAlignment="Top">
+                                        <TextBlock Text="{Binding Title}" FontSize="13" FontWeight="SemiBold"
+                                                   Foreground="{StaticResource WhiteBrush}" Margin="0,0,0,3"
+                                                   TextWrapping="Wrap"/>
+                                        <TextBlock Text="{Binding Desc}" FontSize="11"
+                                                   Foreground="{StaticResource LGrayBrush}"
+                                                   TextWrapping="Wrap" Margin="0,0,0,4"/>
+                                        <TextBlock Text="{Binding Details}" FontSize="10"
+                                                   Foreground="{StaticResource GrayBrush}"
+                                                   TextWrapping="Wrap" FontStyle="Italic"/>
+                                    </StackPanel>
+
+                                    <!-- Risk badge -->
+                                    <Border Grid.Column="3" CornerRadius="4" Padding="8,3"
+                                            Background="{Binding RiskBadgeBg}"
+                                            BorderBrush="{Binding RiskColor}" BorderThickness="1"
+                                            VerticalAlignment="Top" Margin="12,0,0,0">
+                                        <TextBlock Text="{Binding RiskLabel}" FontSize="10" FontWeight="Bold"
+                                                   Foreground="{Binding RiskColor}"/>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Page>
